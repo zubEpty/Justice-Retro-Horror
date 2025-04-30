@@ -12,6 +12,9 @@ public class FakeProfileUI : MonoBehaviour
     public Image profileImage;
     public Transform postsContainer;
     public GameObject postPrefab;
+    public TextMeshProUGUI urlText;
+
+    public GameObject NoResultPage;
 
     void Awake()
     {
@@ -19,21 +22,31 @@ public class FakeProfileUI : MonoBehaviour
         profilePanel.SetActive(false);
     }
 
-    public void ShowProfile(FakeProfile profile)
+    public void ShowProfile(FakeProfile profile, string fakeUrl)
     {
         nameText.text = profile.fullName;
         bioText.text = profile.bio;
         profileImage.sprite = profile.profileImage;
 
+        if (urlText != null)
+            urlText.text = fakeUrl;
+
         foreach (Transform child in postsContainer)
             Destroy(child.gameObject);
 
-        foreach (string post in profile.previousPosts)
+        foreach (var post in profile.previousPosts)
         {
             var postObj = Instantiate(postPrefab, postsContainer);
-            postObj.GetComponentInChildren<TextMeshProUGUI>().text = post;
+            postObj.GetComponent<PostUI>().Setup(post);
         }
 
         profilePanel.SetActive(true);
     }
+
+    public void ShowErrorResultsUi(string url)
+    {
+        NoResultPage.SetActive(true);
+        urlText.text = url;
+    }
+
 }

@@ -16,4 +16,8 @@ public class SearchResultEntry
     public Sprite thumbnail;
     public bool leadsToProfile;
     public FakeProfile profile; // link to a profile if this is the correct entry
+
+    [Header("Optional UI Details")]
+    public string fakeUrl; // e.g. www.nathansocial.net/profile
+
 }

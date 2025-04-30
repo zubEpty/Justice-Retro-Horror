@@ -9,7 +9,7 @@ public class ResultUI : MonoBehaviour
     public TextMeshProUGUI descriptionText;
     public Image thumbnailImage;
     public Button openButton;
-
+ 
     private SearchResultEntry _entry;
 
     public void Setup(SearchResultEntry entry)
@@ -30,12 +30,11 @@ public class ResultUI : MonoBehaviour
         if (_entry.leadsToProfile && _entry.profile != null)
         {
             // Open fake social media profile
-            FakeProfileUI.Instance.ShowProfile(_entry.profile);
+            FakeProfileUI.Instance.ShowProfile(_entry.profile, _entry.fakeUrl);
         }
         else
         {
-            // Optional: open a dummy result popup or show "404" page
-            Debug.Log($"Opening fake result page for {_entry.title}");
+            FakeProfileUI.Instance.ShowErrorResultsUi(_entry.fakeUrl);
         }
     }
 }

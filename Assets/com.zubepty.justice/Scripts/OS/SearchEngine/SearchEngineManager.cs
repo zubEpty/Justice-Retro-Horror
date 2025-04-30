@@ -9,6 +9,7 @@ public class SearchEngineManager : MonoBehaviour
     public TMP_InputField searchInput;
     public Transform resultsParent;
     public GameObject resultPrefab;
+    public GameObject NoResultPage;
     public List<SearchResultData> allSearchResults;
 
     public void OnSearch()
@@ -27,7 +28,7 @@ public class SearchEngineManager : MonoBehaviour
         }
         else
         {
-            // Show no result or static list
+            NoResultPage.SetActive(true);
         }
     }
 }

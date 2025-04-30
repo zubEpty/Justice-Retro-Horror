@@ -8,5 +8,14 @@ public class FakeProfile : ScriptableObject
     public string bio;
     public Sprite profileImage;
     public List<string> knownAssociates;
-    public List<string> previousPosts; // fake social posts or clues
+    public List<ProfilePost> previousPosts; // fake social posts or clues
+}
+
+
+[System.Serializable]
+public class ProfilePost
+{
+    [TextArea]
+    public string postText;
+    public Sprite postImage; // Optional
 }
