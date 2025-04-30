@@ -20,6 +20,10 @@ public class PoliceDatabaseUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _criminalStatusText;   
     [SerializeField] private TextMeshProUGUI _criminalRecordsText;
 
+    [SerializeField] private GameObject _alertPanel;
+    [SerializeField] private GameObject _profilePanel;
+    [SerializeField] private TextMeshProUGUI _alertText;
+
     /// <summary>
     /// Called when search button is pressed. Requires name and one identifier to find profile.
     /// </summary>
@@ -30,7 +34,7 @@ public class PoliceDatabaseUI : MonoBehaviour
 
         if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(identifier))
         {
-            ClearDisplay("Please enter both Name and at least one Identifier (DOB/NID/License).");
+            ClearDisplay("Please enter valid data.");
             return;
         }
 
@@ -46,8 +50,12 @@ public class PoliceDatabaseUI : MonoBehaviour
         }
     }
 
+ 
+
+
     private void DisplayPersonInfo(PersonProfile person)
     {
+        _profilePanel.SetActive(true);
         _nameText.text = $"{person.fullName}";
         _dobText.text = $"{person.dateOfBirth}";
         _nidText.text = $"{person.nationalID}";
@@ -62,11 +70,12 @@ public class PoliceDatabaseUI : MonoBehaviour
             : "";
     }
 
+
+
     private void ClearDisplay(string message)
     {
-        _nameText.text = message;
-        _dobText.text = _nidText.text = _licenseText.text = _criminalRecordsText.text = "";
-        _criminalStatusText.text = "-";
-        _photo.sprite = null;
+        _alertPanel.SetActive(true);
+        _alertText.text = message;
+        _profilePanel.SetActive(false);
     }
 }
