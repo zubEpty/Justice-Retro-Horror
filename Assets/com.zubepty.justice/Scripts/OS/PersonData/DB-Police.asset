@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c777904f0520ec40af6a32b7e09c632, type: 3}
+  m_Name: DB-Police
+  m_EditorClassIdentifier: 
+  people:
+  - {fileID: 11400000, guid: b5d5ad8ae569cb94c8127a951d080bdf, type: 2}
+  - {fileID: 11400000, guid: f13849043936ef54886f128443130a19, type: 2}
+  - {fileID: 11400000, guid: 7fb53a089906d7a458b441b4cf9d8fa3, type: 2}
+  - {fileID: 11400000, guid: 9081b0a62c13ac143a689f35bb460f80, type: 2}
+  - {fileID: 11400000, guid: ce4a7d1fd36311444bae172511ca8e3d, type: 2}
+  - {fileID: 11400000, guid: 3dd0e8ac38a44f249b89fd86336142fa, type: 2}
