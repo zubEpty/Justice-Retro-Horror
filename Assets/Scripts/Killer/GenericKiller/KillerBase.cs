@@ -31,13 +31,16 @@ public class KillerBase : MonoBehaviour
     #region State Machine Variables
 
     public StateMachine<KillerBase> StateMachine { get; set; }
-    /* public EnemyIdleState IdleState { get; set; }
-     public EnemyChaseState ChaseState { get; set; }
-     public EnemyAttackState AttackState { get; set; }
- */
+    public KillerIdleState IdleState { get; set; }
+    //public EnemyChaseState ChaseState { get; set; }
+    //public EnemyAttackState AttackState { get; set; }
+
     #endregion
 
     #region ScriptableObject Variables
+
+    [SerializeField] private KillerIdleSOBase KillerIdleBase;
+    public KillerIdleSOBase KillerIdleBaseInstance { get; set; }
 
     /*[SerializeField] private EnemyIdleSOBase EnemyIdleBase;
     [SerializeField] private EnemyAttackSOBase EnemyAttackBase;
@@ -60,27 +63,29 @@ public class KillerBase : MonoBehaviour
 
     private void Awake()
     {
-        /*// Assign the player's Transform (via GameManager or Inspector)
-        PlayerTransform = GameManager.Instance.Player.transform; // Assuming GameManager has a reference to the player
-
+        
         // Instantiate Scriptable Objects
-        EnemyIdleBaseInstance = Instantiate(EnemyIdleBase);
-        EnemyAttackBaseInstance = Instantiate(EnemyAttackBase);
-        EnemyChaseBaseInstance = Instantiate(EnemyChaseBase);
+        KillerIdleBaseInstance = Instantiate(KillerIdleBase);
 
         // Initialize State Machine
-        StateMachine = new StateMachine<EnemyBase>();
+        StateMachine = new StateMachine<KillerBase>();
 
-        IdleState = new EnemyIdleState(this, StateMachine);
-        ChaseState = new EnemyChaseState(this, StateMachine);
-        AttackState = new EnemyAttackState(this, StateMachine);
 
-        // Assign initial values
-        EnemyIdleBaseInstance.v = 1;*/
+        //
+        IdleState = new KillerIdleState(this, StateMachine);
+
+         
     }
 
     protected virtual void Start()
     {
+        // Initialize Scriptable Objects
+        KillerIdleBaseInstance.Initialize(gameObject, this);
+
+        // Set Initial State
+        //Add a disabled state at the beginning for all the units including player
+        StateMachine.Initialize(IdleState);
+
         // Assign Weapon
         /*if (weaponFactory != null)
         {
