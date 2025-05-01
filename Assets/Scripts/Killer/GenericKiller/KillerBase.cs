@@ -32,24 +32,20 @@ public class KillerBase : MonoBehaviour
 
     public StateMachine<KillerBase> StateMachine { get; set; }
     public KillerIdleState IdleState { get; set; }
-    //public EnemyChaseState ChaseState { get; set; }
-    //public EnemyAttackState AttackState { get; set; }
-
+    public KillerPatrolState PatrolState { get; set; }    
+    public KillerCaughtPlayerState KillerCaughtPlayerState { get; set; }    
     #endregion
 
     #region ScriptableObject Variables
 
     [SerializeField] private KillerIdleSOBase KillerIdleBase;
+    [SerializeField] private KillerPatrolSOBase KillerPatrolBase;
+    [SerializeField] private KillerCaughtPlayerSOBase KillerCaughtPlayerBase;
     public KillerIdleSOBase KillerIdleBaseInstance { get; set; }
+    public KillerPatrolSOBase KillerPatrolBaseInstance { get; set; }
+    public KillerCaughtPlayerSOBase KillerCaughtPlayerInstance { get; set; }
 
-    /*[SerializeField] private EnemyIdleSOBase EnemyIdleBase;
-    [SerializeField] private EnemyAttackSOBase EnemyAttackBase;
-    [SerializeField] private EnemyChaseSOBase EnemyChaseBase;
-
-    public EnemyIdleSOBase EnemyIdleBaseInstance { get; set; }
-    public EnemyAttackSOBase EnemyAttackBaseInstance { get; set; }
-    public EnemyChaseSOBase EnemyChaseBaseInstance { get; set; }*/
-
+   
     #endregion
 
     #region Experimental Variables
@@ -62,29 +58,30 @@ public class KillerBase : MonoBehaviour
     }
 
     private void Awake()
-    {
-        
+    {        
         // Instantiate Scriptable Objects
         KillerIdleBaseInstance = Instantiate(KillerIdleBase);
+        KillerPatrolBaseInstance = Instantiate(KillerPatrolBase);
+        KillerCaughtPlayerInstance = Instantiate(KillerCaughtPlayerBase);
 
         // Initialize State Machine
         StateMachine = new StateMachine<KillerBase>();
-
-
-        //
+        
         IdleState = new KillerIdleState(this, StateMachine);
-
-         
+        PatrolState = new KillerPatrolState(this, StateMachine);
+        KillerCaughtPlayerState = new KillerCaughtPlayerState(this,StateMachine);
     }
 
     protected virtual void Start()
     {
         // Initialize Scriptable Objects
         KillerIdleBaseInstance.Initialize(gameObject, this);
+        KillerPatrolBaseInstance.Initialize(gameObject, this);
+        KillerCaughtPlayerInstance.Initialize(gameObject, this);
 
         // Set Initial State
         //Add a disabled state at the beginning for all the units including player
-        StateMachine.Initialize(IdleState);
+        StateMachine.Initialize(KillerCaughtPlayerState);
 
         // Assign Weapon
         /*if (weaponFactory != null)
