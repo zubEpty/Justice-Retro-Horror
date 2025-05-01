@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class KillerBase : MonoBehaviour
 {
+
+    [SerializeField]private List<GameObject> PatrolPoints = new List<GameObject>();
+    public List<GameObject> GetPatrolPoints => PatrolPoints;
 
     [field: SerializeField] public float MaxHealth { get; set; } = 100f;
     public float CurrentHealth { get; set; }
@@ -45,20 +50,28 @@ public class KillerBase : MonoBehaviour
     public KillerPatrolSOBase KillerPatrolBaseInstance { get; set; }
     public KillerCaughtPlayerSOBase KillerCaughtPlayerInstance { get; set; }
 
-   
+    
     #endregion
 
     #region Experimental Variables
     protected bool isAttacking;
     #endregion
 
-    private void OnEnable()
+    #region NavMeshData
+    private NavMeshAgent m_Agent;
+
+    public NavMeshAgent GetNavAgent => m_Agent;
+    #endregion
+
+
+    public virtual void OnEnable()
     {
         RB = GetComponent<Rigidbody2D>();
+        m_Agent = GetComponent<NavMeshAgent>();
+        
     }
-
     private void Awake()
-    {        
+    {
         // Instantiate Scriptable Objects
         KillerIdleBaseInstance = Instantiate(KillerIdleBase);
         KillerPatrolBaseInstance = Instantiate(KillerPatrolBase);
@@ -81,7 +94,7 @@ public class KillerBase : MonoBehaviour
 
         // Set Initial State
         //Add a disabled state at the beginning for all the units including player
-        StateMachine.Initialize(KillerCaughtPlayerState);
+        StateMachine.Initialize(PatrolState);
 
         // Assign Weapon
         /*if (weaponFactory != null)
@@ -113,6 +126,11 @@ public class KillerBase : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
+    }
+
+    public virtual void ExecuteNavMeshAction()
+    {
+        Debug.LogError("exicuting NavMesh Action");
     }
 
     #region Health/Die

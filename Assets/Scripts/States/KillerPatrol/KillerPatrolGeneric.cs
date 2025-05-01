@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.AI;
 
 
 [CreateAssetMenu(fileName = "Patrol Idle Generic", menuName = "KillerLogic/Patrol Logic/Generic Patrol")]
 public class KillerPatrolGeneric : KillerPatrolSOBase
-{     
-
+{              
     public override void DoAnimationTriggerEventogic(AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventogic(triggerType);
+
+        
     }
 
     public override void DoEnterLogic()
