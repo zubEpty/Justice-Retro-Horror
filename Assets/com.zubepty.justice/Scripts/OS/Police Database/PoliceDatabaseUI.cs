@@ -16,6 +16,7 @@ public class PoliceDatabaseUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _dobText;
     [SerializeField] private TextMeshProUGUI _nidText;
     [SerializeField] private TextMeshProUGUI _licenseText;
+    [SerializeField] private TextMeshProUGUI _contactNo;
     [SerializeField] private Image _photo;
     [SerializeField] private TextMeshProUGUI _criminalStatusText;   
     [SerializeField] private TextMeshProUGUI _criminalRecordsText;
@@ -60,6 +61,7 @@ public class PoliceDatabaseUI : MonoBehaviour
         _dobText.text = $"{person.dateOfBirth}";
         _nidText.text = $"{person.nationalID}";
         _licenseText.text = $"{person.licenseNumber}";
+        _contactNo.text = $"{person.contactNo}";
         _photo.sprite = person.photo;
 
         bool hasCriminals = person.HasCriminalRecord;

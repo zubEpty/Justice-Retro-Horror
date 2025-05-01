@@ -4,24 +4,22 @@ using UnityEngine.UI;
 
 public class MessageUI : MonoBehaviour
 {
-    public TextMeshProUGUI previewText;
-    private string fullMessage;
-
-    // Reference to message viewer
+    public TMP_Text previewText;
+    private MessageData msgData;
     private MessageViewer messageViewer;
 
-    public void Setup(string message, MessageViewer viewer)
+    public void Setup(MessageData data, MessageViewer viewer)
     {
-        fullMessage = message;
-        previewText.text = GetPreview(message);
+        msgData = data;
         messageViewer = viewer;
 
+        previewText.text = GetPreview(data.content);
         GetComponent<Button>().onClick.AddListener(OnClick);
     }
 
     private void OnClick()
     {
-        messageViewer.ShowMessage(fullMessage);
+        messageViewer.ShowMessage(msgData);
     }
 
     private string GetPreview(string full)
