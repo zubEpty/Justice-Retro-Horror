@@ -19,6 +19,8 @@ public class TraceSystem : MonoBehaviour
     public EvidenceSpawner evidenceSpawner;
     public GameObject MessageWindow;
 
+    [SerializeField] private SimTracerFoundStep _simTracerFoundStep;
+
     void Start()
     {
         submitButton.onClick.AddListener(CheckContact);
@@ -32,10 +34,12 @@ public class TraceSystem : MonoBehaviour
         else
         {
             MessageWindow.SetActive(true);
-
+          
 
             string enteredNumber = contactInput.text.Trim();
             ContactProfile profile = allProfiles.FirstOrDefault(p => p.contactNumber == enteredNumber);
+
+            _simTracerFoundStep.SetSimTracerStep(profile);
 
             // Clear old messages
             foreach (Transform child in messageParent)

@@ -25,6 +25,9 @@ public class PoliceDatabaseUI : MonoBehaviour
     [SerializeField] private GameObject _profilePanel;
     [SerializeField] private TextMeshProUGUI _alertText;
 
+    //todo: clean up later
+    [SerializeField] private PoliceRecordFoundStep _foundStep;
+
     /// <summary>
     /// Called when search button is pressed. Requires name and one identifier to find profile.
     /// </summary>
@@ -43,6 +46,8 @@ public class PoliceDatabaseUI : MonoBehaviour
 
         if (result != null)
         {
+            _foundStep.PoilceRecordFoundStep(result);
+
             DisplayPersonInfo(result);
         }
         else

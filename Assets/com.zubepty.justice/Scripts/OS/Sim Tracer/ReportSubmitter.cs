@@ -9,10 +9,17 @@ public class ReportSubmitter : MonoBehaviour
         if (reportBox.isCorrectEvidence)
         {
             Debug.Log("✅ Correct Evidence Submitted!");
+            CompleteTutorial();
         }
         else
         {
             Debug.Log("❌ Incorrect Evidence!");
         }
     }
+
+    public void CompleteTutorial()
+    {
+        FindFirstObjectByType<TutorialManager>()?.SetConditionMetExternally();
+    }
+
 }

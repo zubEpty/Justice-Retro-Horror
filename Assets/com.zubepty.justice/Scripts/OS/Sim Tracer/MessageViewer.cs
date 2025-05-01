@@ -10,6 +10,7 @@ public class MessageViewer : MonoBehaviour
 
     private EvidenceSpawner evidenceSpawner;
     private string currentReferenceID;
+    [SerializeField] private SimTracerFoundStep _step;
 
     public void Initialize(EvidenceSpawner spawner)
     {
@@ -21,6 +22,8 @@ public class MessageViewer : MonoBehaviour
         fullMessageText.text = message.content;
         panel.SetActive(true);
         currentReferenceID = message.referenceID;
+
+        _step.SetEvidenceTracedStep(message);
 
         // Enable or disable download button
         bool hasEvidence = !string.IsNullOrEmpty(currentReferenceID);
