@@ -1,4 +1,4 @@
- using UnityEngine;
+using UnityEngine;
 
 namespace FirstPersonController
 {
@@ -6,10 +6,11 @@ namespace FirstPersonController
     {
         [SerializeField] private float interactionDistance = 3f;
         [SerializeField] private LayerMask interactableLayers;
-
         [SerializeField] private Camera _camera;
+        [SerializeField] private InteractionPromptUI _interactionPromptUI;
 
-   
+        private IInteractable _currentInteractable;
+
         private void OnEnable()
         {
             PlayerInputHandler.Instance.OnInteractInput.AddListener(HandleInteract);
@@ -20,17 +21,35 @@ namespace FirstPersonController
             PlayerInputHandler.Instance.OnInteractInput.RemoveListener(HandleInteract);
         }
 
-        private void HandleInteract()
+        private void Update()
+        {
+            CheckForInteractable();
+        }
+
+        private void CheckForInteractable()
         {
             Ray ray = new Ray(_camera.transform.position, _camera.transform.forward);
 
             if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance, interactableLayers))
             {
-                Debug.Log($"Interacted with {hit.collider.name}");
+                IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    _currentInteractable = interactable;
+                    _interactionPromptUI.Show("Press E to Interact");
+                    return;
+                }
             }
-            else
+
+            _currentInteractable = null;
+            _interactionPromptUI.Hide();
+        }
+
+        private void HandleInteract()
+        {
+            if (_currentInteractable != null)
             {
-                Debug.Log("No interactable object found.");
+                _currentInteractable.Interact();
             }
         }
     }
