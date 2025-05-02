@@ -13,6 +13,7 @@ namespace FirstPersonController
         [Header("Input Events")]
         public UnityEvent<Vector2> OnMoveInput;
         public UnityEvent OnInteractInput;
+        public UnityEvent OnCancelInteractInput;
         public UnityEvent<Vector2> OnLookInput;
 
 
@@ -56,7 +57,17 @@ namespace FirstPersonController
             }
         }
 
-        // Optional: If someone wants the raw input
+
+        public void OnCancelInput(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                OnCancelInteractInput?.Invoke();
+            }
+        }
+
+
+        
         public Vector2 GetCurrentMoveInput()
         {
             return _moveInput;

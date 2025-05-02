@@ -10,20 +10,26 @@ namespace FirstPersonController
         [SerializeField] private InteractionPromptUI _interactionPromptUI;
 
         private IInteractable _currentInteractable;
+        private bool _isInteracting = false;
 
         private void OnEnable()
         {
             PlayerInputHandler.Instance.OnInteractInput.AddListener(HandleInteract);
+            PlayerInputHandler.Instance.OnCancelInteractInput.AddListener(HandleCancel);
         }
 
         private void OnDisable()
         {
             PlayerInputHandler.Instance.OnInteractInput.RemoveListener(HandleInteract);
+            PlayerInputHandler.Instance.OnCancelInteractInput.RemoveListener(HandleCancel);
         }
 
         private void Update()
         {
-            CheckForInteractable();
+            if (!_isInteracting)
+            {
+                CheckForInteractable();
+            }
         }
 
         private void CheckForInteractable()
@@ -36,7 +42,7 @@ namespace FirstPersonController
                 if (interactable != null)
                 {
                     _currentInteractable = interactable;
-                    _interactionPromptUI.Show("Press E to Interact");
+                    _interactionPromptUI.Show(interactable.PromptMessage);
                     return;
                 }
             }
@@ -50,6 +56,21 @@ namespace FirstPersonController
             if (_currentInteractable != null)
             {
                 _currentInteractable.Interact();
+
+                if (_currentInteractable.IsInteractionOngoing)
+                {
+                    _isInteracting = true;
+                    _interactionPromptUI.Hide();
+                }
+            }
+        }
+
+        private void HandleCancel()
+        {
+            if (_isInteracting && _currentInteractable != null)
+            {
+                _currentInteractable.CancelInteraction();
+                _isInteracting = false;
             }
         }
     }
