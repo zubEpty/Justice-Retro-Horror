@@ -7,7 +7,7 @@ public class KillerStefan : KillerBase
 {
     public Transform player;
     private NavMeshAgent agent;
-    private float detectionRadius = 10f;
+    private float detectionRadius = 1f;
 
     public override void OnEnable()
     {
@@ -16,36 +16,16 @@ public class KillerStefan : KillerBase
     protected override void Start()
     {
         base.Start();
-        //StateMachineIgnition(PatrolState);
+        StateMachineIgnition(PatrolState);
         player = PlayerManager.Instance.player.transform;
     }
 
     protected override void Update()
     {
-        base.Update();
-
-        if (IsPlayerOnNavMesh(player.position, detectionRadius))
-        {
-            // Player is on NavMesh - chase them!
-            agent.SetDestination(player.position);
-        }
+        base.Update();        
     }
 
-    bool IsPlayerOnNavMesh(Vector3 targetPosition, float radius)
-    {
-        NavMeshHit hit;
-
-        // Check if the target position is within the detection radius on the NavMesh
-        if (NavMesh.SamplePosition(targetPosition, out hit, radius, NavMesh.AllAreas))
-        {
-            // Additional check to verify the point is actually on the NavMesh
-            if (NavMesh.FindClosestEdge(hit.position, out hit, NavMesh.AllAreas))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+    
 
     #region NavMesh
 
@@ -53,8 +33,10 @@ public class KillerStefan : KillerBase
     public override void ExecuteNavMeshAction()
     {
         base.ExecuteNavMeshAction();
-         
-        if(Vector3.Distance(PatrolPoints[currentPatrolIndex].transform.position, transform.position) < 0.5f 
+
+        CheckForPlayer();
+
+        if (Vector3.Distance(PatrolPoints[currentPatrolIndex].transform.position, transform.position) < 0.5f 
             || GetNavAgent.velocity.magnitude <= 0)
         {
             currentPatrolIndex++;
@@ -66,6 +48,21 @@ public class KillerStefan : KillerBase
         }        
     }
 
-    //public void GotoTargetPosition
+    public void CheckForPlayer()
+    {
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(player.position, out hit, detectionRadius, NavMesh.AllAreas))
+        {
+            KillerStateMachine.ChangeState(CaughtPlayerState_);
+
+            Debug.Log("Player is on the NavMesh.");            
+        }
+        else
+        {
+            Debug.Log("Player is NOT on the NavMesh.");
+        }
+    }
     #endregion
+
+
 }

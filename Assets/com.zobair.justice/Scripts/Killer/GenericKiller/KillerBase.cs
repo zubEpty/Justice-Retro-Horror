@@ -31,14 +31,14 @@ public class KillerBase : MonoBehaviour
     
     private void AnimationTriggerEvent(AnimationTriggerType triggerType)
     {
-        StateMachine.CurrentState.AnimationTriggerEvent(triggerType);
+        KillerStateMachine.CurrentState.AnimationTriggerEvent(triggerType);
     }
 
     #endregion
 
     #region State Machine Variables
 
-    public StateMachine<KillerBase> StateMachine { get; set; }
+    public StateMachine<KillerBase> KillerStateMachine { get; set; }
 
 
     public KillerIdleState IdleState { get; set; }
@@ -87,12 +87,12 @@ public class KillerBase : MonoBehaviour
         KillerLeavingClueInstance = Instantiate(KillerLeavingClueBase);
 
         // Initialize State Machine
-        StateMachine = new StateMachine<KillerBase>();
+        KillerStateMachine = new StateMachine<KillerBase>();
         
-        IdleState = new KillerIdleState(this, StateMachine);
-        PatrolState = new KillerPatrolState(this, StateMachine);
-        CaughtPlayerState_ = new KillerCaughtPlayerState(this,StateMachine);
-        LeavingClueState = new KillerLeavingClueState(this,StateMachine);
+        IdleState = new KillerIdleState(this, KillerStateMachine);
+        PatrolState = new KillerPatrolState(this, KillerStateMachine);
+        CaughtPlayerState_ = new KillerCaughtPlayerState(this, KillerStateMachine);
+        LeavingClueState = new KillerLeavingClueState(this, KillerStateMachine);
     }
 
     protected virtual void Start()
@@ -106,12 +106,12 @@ public class KillerBase : MonoBehaviour
 
     protected virtual void Update()
     {
-        StateMachine.CurrentState.FrameUpdate();
+        KillerStateMachine.CurrentState.FrameUpdate();
     }
 
     protected virtual void FixedUpdate()
     {
-        StateMachine.CurrentState.PhysicsUpdate();
+        KillerStateMachine.CurrentState.PhysicsUpdate();
     }
 
     public virtual void ExecuteNavMeshAction()
@@ -179,7 +179,7 @@ public class KillerBase : MonoBehaviour
 
     protected void StateMachineIgnition(StateBase<KillerBase> InitialState)
     {
-        StateMachine.Initialize(InitialState);
+        KillerStateMachine.Initialize(InitialState);
     }
 }
 
