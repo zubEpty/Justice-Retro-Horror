@@ -201,6 +201,6 @@ public class KillerBase : MonoBehaviour
 
     protected void StateMachineIgnition(StateBase<KillerBase> InitialState)
     {
-        StateMachine.Initialize(LeavingClueState);
+        StateMachine.Initialize(InitialState);
     }
 }

@@ -13,7 +13,7 @@ public class KillerStefan : KillerBase
     protected override void Start()
     {
         base.Start();
-        StateMachineIgnition(CaughtPlayerState_);
+        StateMachineIgnition(PatrolState);
     }
 
 
