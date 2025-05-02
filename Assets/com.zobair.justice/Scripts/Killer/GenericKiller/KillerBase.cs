@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,9 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class KillerBase : MonoBehaviour
 {
+    public List<GameObject> PatrolPoints;
 
-    [SerializeField]private List<GameObject> PatrolPoints = new List<GameObject>();
-    public List<GameObject> GetPatrolPoints => PatrolPoints;
+    protected int currentPatrolIndex = 0;
 
     [field: SerializeField] public float MaxHealth { get; set; } = 100f;
     public float CurrentHealth { get; set; }
@@ -98,32 +99,7 @@ public class KillerBase : MonoBehaviour
         KillerIdleBaseInstance.Initialize(gameObject, this);
         KillerPatrolBaseInstance.Initialize(gameObject, this);
         KillerCaughtPlayerInstance.Initialize(gameObject, this);
-        KillerLeavingClueInstance.Initialize(gameObject, this);
-
-        // Set Initial State
-        //Add a disabled state at the beginning for all the units including player
-        
-
-        // Assign Weapon
-        /*if (weaponFactory != null)
-        {
-            weapon = weaponFactory.CreateWeapon();
-        }
-
-        // Perform initial weapon attack (optional behavior)
-        weapon.Attack();
-
-        // Initialize Health
-        CurrentHealth = MaxHealth;
-
-        // Initialize Scriptable Objects
-        EnemyIdleBaseInstance.Initialize(gameObject, this);
-        EnemyAttackBaseInstance.Initialize(gameObject, this);
-        EnemyChaseBaseInstance.Initialize(gameObject, this);
-
-        // Set Initial State
-        //Add a disabled state at the beginning for all the units including player
-        StateMachine.Initialize(AttackState);*/
+        KillerLeavingClueInstance.Initialize(gameObject, this);      
     }
 
     protected virtual void Update()
@@ -203,4 +179,11 @@ public class KillerBase : MonoBehaviour
     {
         StateMachine.Initialize(InitialState);
     }
+}
+
+[Serializable]
+public class PatrolPointData
+{
+    public GameObject patrolPointPos;
+    public GameObject InteractableObject;
 }

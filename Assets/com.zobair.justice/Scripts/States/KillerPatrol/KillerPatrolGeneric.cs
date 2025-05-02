@@ -17,6 +17,7 @@ public class KillerPatrolGeneric : KillerPatrolSOBase
 
     public override void DoEnterLogic()
     {
+        killer.GetNavAgent.speed = 1.25f;
         Debug.LogError("Patrol State Initialized");
         base.DoEnterLogic();
     }
@@ -29,6 +30,7 @@ public class KillerPatrolGeneric : KillerPatrolSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
+        killer.ExecuteNavMeshAction();
     }
 
     public override void DoPhysicsLogic()
