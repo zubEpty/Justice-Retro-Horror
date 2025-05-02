@@ -2731,10 +2731,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2076071578}
     m_Modifications:
-    - target: {fileID: 511160913253341189, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 577625299471015016, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
       propertyPath: m_Name
       value: Killer Stefan
@@ -2778,14 +2774,6 @@ PrefabInstance:
     - target: {fileID: 5744546646266039805, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7083739235698822635, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
-      propertyPath: KillerLeavingClueBase
-      value: 
-      objectReference: {fileID: 11400000, guid: 7f768a20419d16240b13246b6d8822b4, type: 2}
-    - target: {fileID: 9123573520500492705, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
-      propertyPath: m_AgentTypeID
-      value: -334000983
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

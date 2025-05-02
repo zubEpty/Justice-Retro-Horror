@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37994b85190e66e43b9cd4aae7037399, type: 3}
   m_Name: Killer Leaving Clue
   m_EditorClassIdentifier: 
-  randomSpeed: 10
-  randomMovementRange: 10
+  killerClueInvoker:
+  - {fileID: 4813246333341710599, guid: d0d446ae23f4dcb4d94d3eaf45547777, type: 3}

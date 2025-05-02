@@ -7,12 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Killer Leaving Clue", menuName = "KillerLogic/Leaving Clue Logic/Leaving Clue")]
 public class KillerLeavingClue : KillerLeavingClueSOBase
 {
-    public float randomSpeed = 10f;
-    public float randomMovementRange = 10f;
-
-    GameObject moveTo;
-
-    private int currentMovementIndex;
+    public List<GameObject> killerClueInvoker;
 
     public override void DoAnimationTriggerEventogic(AnimationTriggerType triggerType)
     {
@@ -21,6 +16,7 @@ public class KillerLeavingClue : KillerLeavingClueSOBase
 
     public override void DoEnterLogic()
     {
+        killerClueInvoker[0].GetComponent<ClueBase>()?.LeaveClue();
         Debug.LogError("Leaving Clue State Initialized");
         base.DoEnterLogic();
     }
