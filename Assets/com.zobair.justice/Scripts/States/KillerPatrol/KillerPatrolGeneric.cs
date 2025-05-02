@@ -10,14 +10,13 @@ public class KillerPatrolGeneric : KillerPatrolSOBase
 {              
     public override void DoAnimationTriggerEventogic(AnimationTriggerType triggerType)
     {
-        base.DoAnimationTriggerEventogic(triggerType);
-
-        
+        base.DoAnimationTriggerEventogic(triggerType);        
     }
 
     public override void DoEnterLogic()
     {
         killer.GetNavAgent.speed = 1.25f;
+        killer.anim.Play("Walk");
         Debug.LogError("Patrol State Initialized");
         base.DoEnterLogic();
     }

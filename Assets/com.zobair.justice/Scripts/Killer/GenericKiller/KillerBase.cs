@@ -11,6 +11,8 @@ public class KillerBase : MonoBehaviour
 
     protected int currentPatrolIndex = 0;
 
+    public Animator anim;
+
     [field: SerializeField] public float MaxHealth { get; set; } = 100f;
     public float CurrentHealth { get; set; }
     public Rigidbody2D RB { get; set; }
