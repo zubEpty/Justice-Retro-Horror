@@ -102,7 +102,7 @@ public class KillerBase : MonoBehaviour
 
         // Set Initial State
         //Add a disabled state at the beginning for all the units including player
-        StateMachine.Initialize(LeavingClueState);
+        
 
         // Assign Weapon
         /*if (weaponFactory != null)
@@ -198,4 +198,9 @@ public class KillerBase : MonoBehaviour
     }
 
     #endregion
+
+    protected void StateMachineIgnition(StateBase<KillerBase> InitialState)
+    {
+        StateMachine.Initialize(LeavingClueState);
+    }
 }

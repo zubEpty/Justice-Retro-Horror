@@ -3,19 +3,19 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class KillerStefan : KillerBase
+public class KillerMarcos : KillerBase
 {
-    
+
     public override void OnEnable()
     {
         base.OnEnable();        
     }
+
     protected override void Start()
     {
         base.Start();
         StateMachineIgnition(CaughtPlayerState_);
     }
-
 
     #region NavMesh
     Vector3 GetRandomPositionFromNavMesh()
@@ -42,7 +42,7 @@ public class KillerStefan : KillerBase
             r2
         );
     }
-    
+
     public override void ExecuteNavMeshAction()
     {
         base.ExecuteNavMeshAction();
