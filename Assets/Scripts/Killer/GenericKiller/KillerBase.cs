@@ -36,9 +36,12 @@ public class KillerBase : MonoBehaviour
     #region State Machine Variables
 
     public StateMachine<KillerBase> StateMachine { get; set; }
+
+
     public KillerIdleState IdleState { get; set; }
     public KillerPatrolState PatrolState { get; set; }    
-    public KillerCaughtPlayerState KillerCaughtPlayerState { get; set; }    
+    public KillerCaughtPlayerState CaughtPlayerState_ { get; set; }    
+    public KillerLeavingClueState LeavingClueState { get; set; }    
     #endregion
 
     #region ScriptableObject Variables
@@ -46,9 +49,11 @@ public class KillerBase : MonoBehaviour
     [SerializeField] private KillerIdleSOBase KillerIdleBase;
     [SerializeField] private KillerPatrolSOBase KillerPatrolBase;
     [SerializeField] private KillerCaughtPlayerSOBase KillerCaughtPlayerBase;
+    [SerializeField] private KillerLeavingClueSOBase KillerLeavingClueBase;
     public KillerIdleSOBase KillerIdleBaseInstance { get; set; }
     public KillerPatrolSOBase KillerPatrolBaseInstance { get; set; }
     public KillerCaughtPlayerSOBase KillerCaughtPlayerInstance { get; set; }
+    public KillerLeavingClueSOBase KillerLeavingClueInstance { get; set; }
 
     
     #endregion
@@ -76,13 +81,15 @@ public class KillerBase : MonoBehaviour
         KillerIdleBaseInstance = Instantiate(KillerIdleBase);
         KillerPatrolBaseInstance = Instantiate(KillerPatrolBase);
         KillerCaughtPlayerInstance = Instantiate(KillerCaughtPlayerBase);
+        KillerLeavingClueInstance = Instantiate(KillerLeavingClueBase);
 
         // Initialize State Machine
         StateMachine = new StateMachine<KillerBase>();
         
         IdleState = new KillerIdleState(this, StateMachine);
         PatrolState = new KillerPatrolState(this, StateMachine);
-        KillerCaughtPlayerState = new KillerCaughtPlayerState(this,StateMachine);
+        CaughtPlayerState_ = new KillerCaughtPlayerState(this,StateMachine);
+        LeavingClueState = new KillerLeavingClueState(this,StateMachine);
     }
 
     protected virtual void Start()
@@ -91,10 +98,11 @@ public class KillerBase : MonoBehaviour
         KillerIdleBaseInstance.Initialize(gameObject, this);
         KillerPatrolBaseInstance.Initialize(gameObject, this);
         KillerCaughtPlayerInstance.Initialize(gameObject, this);
+        KillerLeavingClueInstance.Initialize(gameObject, this);
 
         // Set Initial State
         //Add a disabled state at the beginning for all the units including player
-        StateMachine.Initialize(PatrolState);
+        StateMachine.Initialize(LeavingClueState);
 
         // Assign Weapon
         /*if (weaponFactory != null)

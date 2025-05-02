@@ -161,6 +161,7 @@ MonoBehaviour:
   KillerIdleBase: {fileID: 11400000, guid: 589db26656f9d8f498eceb3f6fba5ca5, type: 2}
   KillerPatrolBase: {fileID: 11400000, guid: 209b105848dc99b449ebeb3cead0aea9, type: 2}
   KillerCaughtPlayerBase: {fileID: 11400000, guid: ccd5922032f97c845a2c056b1366f6ef, type: 2}
+  KillerLeavingClueBase: {fileID: 11400000, guid: 7f768a20419d16240b13246b6d8822b4, type: 2}
   DetectPlayerDistanceThreshold: 5
   DetectionCircleColor: {r: 0, g: 0, b: 1, a: 1}
   AttackDistanceThreshold: 5
@@ -173,7 +174,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577625299471015016}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -334000983
   m_Radius: 0.49999997
   m_Speed: 3.5
   m_Acceleration: 8
