@@ -1,16 +1,18 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class KillerStefan : KillerBase
 {
+    
     public override void OnEnable()
     {
         base.OnEnable();
         
     }
-
-
+   
+    #region NavMesh
     Vector3 GetRandomPositionFromNavMesh()
     {
         // Get NavMesh data
@@ -45,4 +47,5 @@ public class KillerStefan : KillerBase
             GetNavAgent.destination = GetRandomPositionFromNavMesh();// GetPatrolPoints[Random.RandomRange(0, GetPatrolPoints.Count - 1)].transform.position;
         }
     }
+    #endregion
 }
