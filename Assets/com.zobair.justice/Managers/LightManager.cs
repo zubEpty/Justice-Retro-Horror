@@ -1,16 +1,22 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LightManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private List<Light> houseLights;
+    public List<Light> GetLights => houseLights;
 
-    // Update is called once per frame
-    void Update()
+    private bool isRoomPowered = true;
+
+    [ContextMenu("Toggle Poiwer to All Room Point Lights")]
+    public void ToggleRoomPower()
     {
-        
+        isRoomPowered = !isRoomPowered;
+
+        foreach (Light light in houseLights)
+        {
+            light.enabled = isRoomPowered;
+        }        
     }
 }
