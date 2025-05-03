@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 17155917}
   - component: {fileID: 17155921}
   - component: {fileID: 17155922}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -6587,7 +6587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 334928491}
   - component: {fileID: 334928492}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Audio-intense
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7047,11 +7047,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2df858d1962ac074ea2be6a654ba9ddb, type: 3}
---- !u!137 &345450105 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7793820124551339600, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
-  m_PrefabInstance: {fileID: 937663952}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &348465526
 GameObject:
   m_ObjectHideFlags: 0
@@ -13318,7 +13313,7 @@ Transform:
   m_GameObject: {fileID: 650604959}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3020897, y: 0, z: 2.8852615}
+  m_LocalPosition: {x: -0.3020897, y: -0.039, z: 2.8852615}
   m_LocalScale: {x: 0.36359996, y: 0.3636, z: 0.3636}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18588,21 +18583,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 835685146}
     m_Modifications:
-    - target: {fileID: 511160913253341189, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 577625299471015016, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
       propertyPath: m_Name
       value: Killer Stefan
-      objectReference: {fileID: 0}
-    - target: {fileID: 577625299471015016, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4462626690848586673, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5744546646266039805, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18645,14 +18628,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7083739235698822635, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
-      propertyPath: _duration
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7083739235698822635, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
-      propertyPath: _killerSkin
-      value: 
-      objectReference: {fileID: 345450105}
-    - target: {fileID: 7083739235698822635, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
       propertyPath: 'PatrolPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 650604959}
@@ -18672,12 +18647,7 @@ PrefabInstance:
       propertyPath: 'PatrolPoints.Array.data[4]'
       value: 
       objectReference: {fileID: 526533483}
-    - target: {fileID: 7793820124551339600, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 511160913253341189, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -19819,7 +19789,7 @@ GameObject:
   - component: {fileID: 1036422429}
   - component: {fileID: 1036422432}
   - component: {fileID: 1036422431}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26163,7 +26133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1413463058}
   - component: {fileID: 1413463059}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31372,7 +31342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1703945262}
   - component: {fileID: 1703945263}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}

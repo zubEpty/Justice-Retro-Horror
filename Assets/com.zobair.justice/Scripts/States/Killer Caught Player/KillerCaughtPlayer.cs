@@ -22,7 +22,7 @@ public class KillerCaughtPlayer : KillerCaughtPlayerSOBase
 
     public override void DoEnterLogic()
     {
-        killer.GetNavAgent.speed = 0f;
+        killer.GetNavAgent.speed = 4f;
         Debug.LogError("Killer Caught Player State Initialized"); 
         
         base.DoEnterLogic();
@@ -37,6 +37,13 @@ public class KillerCaughtPlayer : KillerCaughtPlayerSOBase
     {
         killer.GetNavAgent.destination = PlayerManager.Instance.player.transform.position;
         base.DoFrameUpdateLogic();
+
+        if (Vector3.Distance(killer.transform.position, PlayerManager.Instance.player.transform.position) < 1f)
+        {
+            killer.GetNavAgent.speed = 0f;
+
+            //put Game over logic here
+        }
     }
 
     public override void DoPhysicsLogic()

@@ -29,12 +29,8 @@ public class KillerPatrolGeneric : KillerPatrolSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
-        killer.ExecuteNavMeshAction();
-        Debug.Log($"Distance {Vector3.Distance(killer.transform.position, PlayerManager.Instance.player.transform.position)}");
-        //if(Vector3.Distance(killer.transform.position, PlayerManager.Instance.player.transform.position) < 1f)
-        //{
-        //    killer.KillerStateMachine.ChangeState(killer.CaughtPlayerState_);
-        //}
+        killer.ExecuteNavMeshAction();        
+        
     }
 
     public override void DoPhysicsLogic()

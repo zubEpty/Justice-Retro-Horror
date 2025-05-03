@@ -35,10 +35,10 @@ public class KillerStefan : KillerBase
 
     IEnumerator DelaySpawner()
     {
-        yield return new WaitForSeconds(_duration);
-        KillerStateMachine.ChangeState(PatrolState);
+        yield return new WaitForSeconds(_duration);        
         SpawnKillerPosition();
         SpawnKillerState();
+        KillerStateMachine.ChangeState(PatrolState);
     }
 
     private void SpawnKillerPosition()
