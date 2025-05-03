@@ -38,10 +38,11 @@ public class KillerCaughtPlayer : KillerCaughtPlayerSOBase
         killer.GetNavAgent.destination = PlayerManager.Instance.player.transform.position;
         base.DoFrameUpdateLogic();
 
-        if (Vector3.Distance(killer.transform.position, PlayerManager.Instance.player.transform.position) < 1f)
+        if (Vector3.Distance(killer.transform.position, PlayerManager.Instance.player.transform.position) < 2f)
         {
             killer.GetNavAgent.speed = 0f;
 
+            GameManager.Instance.LoadGameOverUi();
             //put Game over logic here
         }
     }

@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [SerializeField] private GameObject _gameoverPanel;
+
     
     void Awake()
     {
@@ -19,6 +21,12 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void LoadGameOverUi()
+    {
+        _gameoverPanel.SetActive(true);
+    }
+
 
     public LightManager LightManager_;
 
