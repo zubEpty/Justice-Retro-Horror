@@ -14,17 +14,19 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Persist across scenes
+            //DontDestroyOnLoad(gameObject); // Persist across scenes
         }
         else
         {
-            Destroy(gameObject);
+           // Destroy(gameObject);
         }
     }
 
     public void LoadGameOverUi()
     {
         _gameoverPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
 
@@ -34,6 +36,11 @@ public class GameManager : MonoBehaviour
     public void ShutDownPowerSupply()
     {
         LightManager_.ToggleRoomPower();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
  
 }

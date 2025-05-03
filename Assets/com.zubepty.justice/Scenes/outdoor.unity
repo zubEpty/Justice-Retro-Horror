@@ -565,6 +565,7 @@ Transform:
   - {fileID: 1036422430}
   - {fileID: 1703945262}
   - {fileID: 334928491}
+  - {fileID: 41301327}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -66.7, z: 0}
 --- !u!114 &17155917
@@ -1699,17 +1700,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41301323}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.5497519, z: -0, w: 0.835328}
+  m_LocalPosition: {x: 0, y: 0, z: -28.595774}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 307720921}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 17155916}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -34.09134, y: -1.903}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &60796313
@@ -4721,7 +4722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &232575400
 Transform:
   m_ObjectHideFlags: 0
@@ -8790,6 +8791,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1971244963}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!1 &403855360
 GameObject:
   m_ObjectHideFlags: 0
@@ -8865,7 +8878,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.64123076, y: 1, z: 0.13460644}
   m_Center: {x: 0.24686721, y: 0, z: 0.059496302}
@@ -11415,7 +11428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &527448282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11429,9 +11442,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _director: {fileID: 527448283}
-  _player: {fileID: 17155914}
+  _player: {fileID: 1036422427}
   _cutsceneCamera: {fileID: 232575399}
-  _titleText: {fileID: 226183342}
+  _titleText: {fileID: 401279691}
 --- !u!320 &527448283
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -18858,6 +18871,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Killer Stefan
       objectReference: {fileID: 0}
+    - target: {fileID: 4461778046518702348, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
+      propertyPath: m_TagString
+      value: Killer
+      objectReference: {fileID: 0}
     - target: {fileID: 5744546646266039805, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.181
@@ -19460,7 +19477,7 @@ MonoBehaviour:
   _sweepDuration: 12
   _circuitBox: {fileID: 1396628138}
   _jumpscareJack: {fileID: 1508105300}
-  _playerCam: {fileID: 1036422427}
+  _playerCam: {fileID: 17155917}
   OnJumpscareEnabledEvent:
     m_PersistentCalls:
       m_Calls:
@@ -19475,6 +19492,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 403855362}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &963194230
 MonoBehaviour:
@@ -20206,7 +20235,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &1036422428
 Camera:
   m_ObjectHideFlags: 0
@@ -24505,9 +24534,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a261c9de971b734eac38c9b1b7e080d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1036422427}
+  _playerCamera: {fileID: 1036422427}
   _lockerCamera: {fileID: 1680666385}
   _playerController: {fileID: 17155919}
+  _player: {fileID: 17155914}
 --- !u!1 &1304901099
 GameObject:
   m_ObjectHideFlags: 0
@@ -36605,7 +36635,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971244962}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 976c7844feafe594d8f8d599515b20c2, type: 3}
   m_Name: 
@@ -39003,7 +39033,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2096700071
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42189,7 +42219,6 @@ SceneRoots:
   - {fileID: 823622305}
   - {fileID: 1862772323}
   - {fileID: 348465530}
-  - {fileID: 41301327}
   - {fileID: 635530168}
   - {fileID: 476766733}
   - {fileID: 2076989159}

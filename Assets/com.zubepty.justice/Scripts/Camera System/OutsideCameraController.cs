@@ -1,5 +1,6 @@
 using System.Buffers.Text;
 using System.Collections;
+using FirstPersonController;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,7 +16,7 @@ public class OutsideCameraController : MonoBehaviour
 
     [SerializeField] private CircuitBoxInterActor _circuitBox;
     [SerializeField] private GameObject _jumpscareJack;
-    [SerializeField] private GameObject _playerCam;
+    [SerializeField] private PlayerInteractor _playerCam;
 
     public UnityEvent OnJumpscareEnabledEvent;
 
@@ -73,6 +74,6 @@ public class OutsideCameraController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         this.gameObject.SetActive(false);
         OnJumpscareEnabledEvent.Invoke();
-        _playerCam.SetActive(true);
+        _playerCam.HandleCancel();
     }
 }
