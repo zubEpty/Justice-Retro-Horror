@@ -79,7 +79,7 @@ public class KillerStefan : KillerBase
         NavMeshHit hit;
         if (NavMesh.SamplePosition(player.position, out hit, detectionRadius, NavMesh.AllAreas))
         {
-            //KillerStateMachine.ChangeState(CaughtPlayerState_);
+            KillerStateMachine.ChangeState(CaughtPlayerState_);
 
             Debug.Log("Player is on the NavMesh.");            
         }
