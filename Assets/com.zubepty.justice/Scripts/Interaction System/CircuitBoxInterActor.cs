@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CircuitBoxInterActor : MonoBehaviour, IInteractable
 {
     public bool IsInteractionOngoing => false;
 
     public string PromptMessage => "Press E to turn on the power";
+
+    public UnityEvent OnCircuitBoxEnabled;
 
     public void CancelInteraction()
     {
@@ -13,6 +16,7 @@ public class CircuitBoxInterActor : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        OnCircuitBoxEnabled?.Invoke();
         GetComponent<Outline>().enabled = false;
         GameManager.Instance.LightManager_.ToggleRoomPower();       
     }

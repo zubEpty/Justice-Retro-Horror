@@ -22,7 +22,7 @@ public class JumpscareTrigger : MonoBehaviour
     }
 
     [ContextMenu("Trigger Jumpscare")]
-    void TriggerJumpscare()
+    public void TriggerJumpscare()
     {
         // Spawn a random scary model
         int index = Random.Range(0, jumpscarePrefabs.Length);

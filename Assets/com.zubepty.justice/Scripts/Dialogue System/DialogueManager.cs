@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FirstPersonController;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -17,17 +18,19 @@ public class DialogueManager : MonoBehaviour
     private int currentIndex = 0;
     private Coroutine typingCoroutine;
 
+    public UnityEvent OnDialogueEnded;
+
     private Dictionary<string, string> conditions = new();
 
     private void Start()
     {
-        DialogueCanvas.SetActive(true);
         StartDialogue(startSequence);
     }
 
 
     public void StartDialogue(DialogueSet dialogue)
     {
+        DialogueCanvas.SetActive(true);
         currentDialogue = dialogue;
         currentIndex = 0;
         ShowLine();
@@ -100,7 +103,9 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueText.text = "";
         speakerText.text = "";
+        DialogueCanvas.SetActive(false);
         Debug.Log("Dialogue Ended.");
+        OnDialogueEnded?.Invoke();
     }
 
     public void SetCondition(string key, string value) => conditions[key] = value;

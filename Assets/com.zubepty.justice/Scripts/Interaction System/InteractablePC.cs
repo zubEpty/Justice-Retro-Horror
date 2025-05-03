@@ -19,6 +19,7 @@ public class InteractablePC : MonoBehaviour, IInteractable
       
     }
 
+    [ContextMenu("Cancel Interaction")]
     public void CancelInteraction()
     {
         _desktopCanvas.SetActive(false);

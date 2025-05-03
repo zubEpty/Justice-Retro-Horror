@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
 using TMPro;
+using UnityEngine.Events;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class TutorialManager : MonoBehaviour
     private int currentStepIndex = 0;
     private bool isConditionMet = false;
     private bool stepInProgress = false;
+
+
+    public UnityEvent OnTutorialCompleted;
 
     void Start()
     {
@@ -35,6 +39,7 @@ public class TutorialManager : MonoBehaviour
         if (index >= tutorialSteps.Count)
         {
             tutorialTextUI.text = "Tutorial Complete!";
+            OnTutorialCompleted?.Invoke();
             nextButton.gameObject.SetActive(false);
             return;
         }

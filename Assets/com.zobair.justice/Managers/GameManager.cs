@@ -22,10 +22,10 @@ public class GameManager : MonoBehaviour
 
     public LightManager LightManager_;
 
-    void Update()
+  
+    public void ShutDownPowerSupply()
     {
-        
+        LightManager_.ToggleRoomPower();
     }
-
  
 }

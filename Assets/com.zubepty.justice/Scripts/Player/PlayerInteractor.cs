@@ -65,7 +65,7 @@ namespace FirstPersonController
             }
         }
 
-        private void HandleCancel()
+        public void HandleCancel()
         {
             if (_isInteracting && _currentInteractable != null)
             {

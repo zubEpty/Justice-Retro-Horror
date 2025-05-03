@@ -16,6 +16,8 @@ namespace FirstPersonController
         public UnityEvent OnCancelInteractInput;
         public UnityEvent<Vector2> OnLookInput;
         public UnityEvent OnAdvanceDialogueInput;
+        public UnityEvent OnToggleFlashlightInput;
+
 
 
         private Vector2 _moveInput;
@@ -45,6 +47,15 @@ namespace FirstPersonController
                 OnAdvanceDialogueInput?.Invoke();
             }
         }
+
+        public void GetToggleFlashlightInput(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                OnToggleFlashlightInput?.Invoke();
+            }
+        }
+
 
         public void GetLookInput(InputAction.CallbackContext context)
         {

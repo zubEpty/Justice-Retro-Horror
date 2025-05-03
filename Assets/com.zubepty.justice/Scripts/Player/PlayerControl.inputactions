@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleFlashlight",
+                    "type": "Button",
+                    "id": "b7dd6912-58ce-4508-bb28-ab396e31b389",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -247,6 +256,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Advance",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7b88a740-e375-4309-86b1-2e10c90a2136",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleFlashlight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

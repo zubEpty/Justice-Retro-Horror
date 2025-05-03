@@ -32,6 +32,11 @@ namespace FirstPersonController
             Move();
         }
 
+        public void ChangeMoveSpeed(int speed)
+        {
+            moveSpeed = speed;
+        }
+
         private void HandleMoveInput(Vector2 input)
         {
             _moveInput = input;
