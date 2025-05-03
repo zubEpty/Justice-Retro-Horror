@@ -1,28 +1,23 @@
-﻿
 using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.AI;
 
 
-[CreateAssetMenu(fileName = "Killer Caught Player Generic", menuName = "KillerLogic/Caught Player Logic/Caught Player")]
-public class KillerCaughtPlayer : KillerCaughtPlayerSOBase
-{
-    public float randomSpeed = 10f;
-    public float randomMovementRange = 10f;
-
-    GameObject moveTo;
-
-    private int currentMovementIndex;
-
+[CreateAssetMenu(fileName = "Patrol Idle Generic", menuName = "KillerLogic/Patrol Logic/Generic Patrol")]
+public class KillerPatrolGeneric : KillerPatrolSOBase
+{              
     public override void DoAnimationTriggerEventogic(AnimationTriggerType triggerType)
     {
-        base.DoAnimationTriggerEventogic(triggerType);
+        base.DoAnimationTriggerEventogic(triggerType);        
     }
 
     public override void DoEnterLogic()
     {
-        Debug.LogError("Killer Caught Player State Initialized");
+        killer.GetNavAgent.speed = 1.25f;
+        killer.anim.Play("Walk");
+        Debug.LogError("Patrol State Initialized");
         base.DoEnterLogic();
     }
 
@@ -34,6 +29,7 @@ public class KillerCaughtPlayer : KillerCaughtPlayerSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
+        killer.ExecuteNavMeshAction();
     }
 
     public override void DoPhysicsLogic()

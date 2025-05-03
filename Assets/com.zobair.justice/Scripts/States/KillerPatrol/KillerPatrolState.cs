@@ -23,7 +23,6 @@ public class KillerPatrolState : StateBase<KillerBase>
         base.EnterState();
         entity.KillerPatrolBaseInstance.DoEnterLogic();
 
-        entity.GetNavAgent.speed = 10;//(m_animator.deltaPosition/ Time.deltaTime).magnitude;
     }
 
     public override void ExitState()
@@ -37,7 +36,7 @@ public class KillerPatrolState : StateBase<KillerBase>
         base.FrameUpdate();
         entity.KillerPatrolBaseInstance.DoFrameUpdateLogic();
 
-        entity.ExecuteNavMeshAction();        
+             
     }
 
     public override void PhysicsUpdate()
