@@ -18,7 +18,7 @@ public class LockerHideManager : MonoBehaviour, IInteractable
         _playerCamera.SetActive(true);
         _lockerCamera.SetActive(false);
         _playerController.enabled = true;
-        _player.gameObject.transform.position -= new Vector3(0, 0.4f, 0);
+        _player.gameObject.transform.position = new Vector3(_player.gameObject.transform.position.x, 2.1f, _player.gameObject.transform.position.z);
 
     }
 
@@ -27,7 +27,8 @@ public class LockerHideManager : MonoBehaviour, IInteractable
         _playerCamera.SetActive(false);
         _lockerCamera.SetActive(true);
         _playerController.enabled = false;
-        _player.gameObject.transform.position += new Vector3(0, 0.4f, 0);
+
+        _player.gameObject.transform.position = new Vector3(_player.gameObject.transform.position.x, 2.4f, _player.gameObject.transform.position.z);
     }
 
    
