@@ -22,8 +22,9 @@ public class KillerCaughtPlayer : KillerCaughtPlayerSOBase
 
     public override void DoEnterLogic()
     {
-        killer.GetNavAgent.speed = 4f;
-        Debug.LogError("Killer Caught Player State Initialized");        
+        killer.GetNavAgent.speed = 0f;
+        Debug.LogError("Killer Caught Player State Initialized"); 
+        
         base.DoEnterLogic();
     }
 

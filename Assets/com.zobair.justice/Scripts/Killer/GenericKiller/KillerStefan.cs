@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -7,7 +8,9 @@ public class KillerStefan : KillerBase
 {
     public Transform player;
     private NavMeshAgent agent;
-   [SerializeField] private float detectionRadius = 5f;
+    [SerializeField] private float detectionRadius = 5f;
+    [SerializeField] private float _duration;
+    [SerializeField] private SkinnedMeshRenderer _killerSkin;
 
     public override void OnEnable()
     {
@@ -24,6 +27,25 @@ public class KillerStefan : KillerBase
     {
         base.Update();        
     }
+
+    public void KillerSpawn()
+    {
+        StartCoroutine(DelaySpawner());
+    }
+
+    IEnumerator DelaySpawner()
+    {
+        yield return new WaitForSeconds(_duration);
+        KillerStateMachine.ChangeState(PatrolState);
+        SpawnKillerPosition();
+        SpawnKillerState();
+    }
+
+    private void SpawnKillerPosition()
+    {
+        _killerSkin.enabled = true;
+    }
+
 
     [ContextMenu("Start chasing")]
     public void SpawnKillerState()

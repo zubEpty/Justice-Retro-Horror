@@ -1,5 +1,7 @@
 using System.Buffers.Text;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class OutsideCameraController : MonoBehaviour
 {
@@ -11,6 +13,14 @@ public class OutsideCameraController : MonoBehaviour
     [SerializeField] private float _endAngle = 45f;
     [SerializeField] private float _sweepDuration = 4f;
 
+    [SerializeField] private CircuitBoxInterActor _circuitBox;
+    [SerializeField] private GameObject _jumpscareJack;
+    [SerializeField] private GameObject _playerCam;
+
+    public UnityEvent OnJumpscareEnabledEvent;
+
+    
+
     private float t = 0f;
     private bool isReversing = false;
 
@@ -20,6 +30,7 @@ public class OutsideCameraController : MonoBehaviour
 
     void Start()
     {
+        DoJumpscareCamera();
         // Cache the original X and Z rotation
         Vector3 initialEuler = transform.localEulerAngles;
         baseX = initialEuler.x;
@@ -46,5 +57,22 @@ public class OutsideCameraController : MonoBehaviour
         {
             isReversing = !isReversing;
         }
+    }
+
+    public void DoJumpscareCamera()
+    {
+        if(_circuitBox.OnPowerCircuitEnabled)
+        {
+            _jumpscareJack.SetActive(true);
+            StartCoroutine(ExitCameraState());
+        }
+    }
+
+    IEnumerator ExitCameraState()
+    {
+        yield return new WaitForSeconds(2f);
+        this.gameObject.SetActive(false);
+        OnJumpscareEnabledEvent.Invoke();
+        _playerCam.SetActive(true);
     }
 }
