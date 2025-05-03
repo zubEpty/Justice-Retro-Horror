@@ -7,7 +7,7 @@ public class KillerStefan : KillerBase
 {
     public Transform player;
     private NavMeshAgent agent;
-    private float detectionRadius = 1f;
+   [SerializeField] private float detectionRadius = 5f;
 
     public override void OnEnable()
     {
@@ -16,7 +16,7 @@ public class KillerStefan : KillerBase
     protected override void Start()
     {
         base.Start();
-        StateMachineIgnition(PatrolState);
+        StateMachineIgnition(IdleState);
         player = PlayerManager.Instance.player.transform;
     }
 
@@ -25,7 +25,11 @@ public class KillerStefan : KillerBase
         base.Update();        
     }
 
-    
+    [ContextMenu("Start chasing")]
+    public void SpawnKillerState()
+    {
+        KillerStateMachine.ChangeState(PatrolState);
+    }
 
     #region NavMesh
 

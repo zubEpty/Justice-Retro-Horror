@@ -558,7 +558,7 @@ Transform:
   m_GameObject: {fileID: 17155914}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.5497519, z: 0, w: 0.835328}
-  m_LocalPosition: {x: -12.779, y: 1.999, z: 42.622}
+  m_LocalPosition: {x: -12.779, y: 1.8, z: 42.622}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16770,8 +16770,8 @@ Transform:
   m_GameObject: {fileID: 880882364}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7052622, z: -0, w: 0.7089467}
-  m_LocalPosition: {x: -15.445, y: 1.207, z: 1.105}
-  m_LocalScale: {x: 1.8949493, y: 2.242872, z: 0.10729}
+  m_LocalPosition: {x: -15.4461, y: 1.285, z: 1.3276}
+  m_LocalScale: {x: 2.5215802, y: 2.242872, z: 0.10729}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2064594902}
@@ -18340,6 +18340,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 835685146}
     m_Modifications:
+    - target: {fileID: 511160913253341189, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 577625299471015016, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
       propertyPath: m_Name
       value: Killer Stefan
@@ -18404,7 +18408,8 @@ PrefabInstance:
       propertyPath: 'PatrolPoints.Array.data[4]'
       value: 
       objectReference: {fileID: 526533483}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 511160913253341189, guid: 6ba8f96db04bbac4ca84b797e06853b8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
