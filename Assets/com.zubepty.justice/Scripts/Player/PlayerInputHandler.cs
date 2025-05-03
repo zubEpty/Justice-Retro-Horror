@@ -15,6 +15,7 @@ namespace FirstPersonController
         public UnityEvent OnInteractInput;
         public UnityEvent OnCancelInteractInput;
         public UnityEvent<Vector2> OnLookInput;
+        public UnityEvent OnAdvanceDialogueInput;
 
 
         private Vector2 _moveInput;
@@ -35,6 +36,14 @@ namespace FirstPersonController
         {
             _moveInput = context.ReadValue<Vector2>();
             OnMoveInput?.Invoke(_moveInput);
+        }
+
+        public void GetAdvanceDialogueInput(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                OnAdvanceDialogueInput?.Invoke();
+            }
         }
 
         public void GetLookInput(InputAction.CallbackContext context)
