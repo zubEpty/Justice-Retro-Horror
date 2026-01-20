@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3466877124920385373}
   - component: {fileID: 7194559858261697639}
   - component: {fileID: 5485501490532855844}
+  - component: {fileID: 7094292470782250160}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -75,6 +76,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7094292470782250160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333886714113066696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8d3e9ba02f15cb42a7668a8efaac950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImageThumbnail
+  thumbnailImage: {fileID: 5485501490532855844}
 --- !u!1 &3439718757661958697
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +388,34 @@ PrefabInstance:
     - target: {fileID: 338545437369374793, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_margin.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633663483710074167, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633663483710074167, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633663483710074167, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7094292470782250160}
+    - target: {fileID: 1633663483710074167, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633663483710074167, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633663483710074167, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: ImageThumbnail, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633663483710074167, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1909408545363170364, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_Spacing
