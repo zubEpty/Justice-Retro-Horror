@@ -338,18 +338,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1699265259}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 912574077}
         m_TargetAssemblyTypeName: SearchEngineManager, Assembly-CSharp
         m_MethodName: OnSearch
@@ -1236,6 +1224,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fdd008c9d5da59543b7a48874316be46, type: 2}
   tutorialTextUI: {fileID: 1518789528}
   nextButton: {fileID: 1304901101}
+  OnTutorialCompleted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &70401137
 Transform:
   m_ObjectHideFlags: 0
@@ -3900,6 +3891,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reportBox: {fileID: 1644752340}
+  OnReportSubmitSuccessfully:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReportSubmitFailed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &335079912
 GameObject:
   m_ObjectHideFlags: 0
@@ -7061,8 +7058,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1607570997}
   m_HandleRect: {fileID: 1607570996}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.31710818
+  m_Value: 1.0000001
+  m_Size: 0.31710824
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11208,6 +11205,8 @@ MonoBehaviour:
   NoResultPage: {fileID: 17310607}
   allSearchResults:
   - {fileID: 11400000, guid: 8d3a5faeca5d3a34baccf62b5dba9276, type: 2}
+  _uriText: {fileID: 912705192}
+  _SearchResultPage: {fileID: 1699265259}
 --- !u!114 &912574078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11252,10 +11251,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1035280710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.5046158, y: 0}
-  m_SizeDelta: {x: 545.75, y: 14.583}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 448.53, y: -0.000012533}
+  m_SizeDelta: {x: 886.41, y: 23.491}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &912705192
 MonoBehaviour:
@@ -11312,7 +11311,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -24379,6 +24378,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reportBox: {fileID: 1139119401}
+  OnReportSubmitSuccessfully:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReportSubmitFailed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1994586714
 GameObject:
   m_ObjectHideFlags: 0
@@ -26213,7 +26218,7 @@ GameObject:
   - component: {fileID: 2146226178}
   - component: {fileID: 2146226177}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button_Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26322,6 +26327,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 912574077}
+        m_TargetAssemblyTypeName: SearchEngineManager, Assembly-CSharp
+        m_MethodName: ClearEntry
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

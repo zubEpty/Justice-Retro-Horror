@@ -19,7 +19,7 @@ MonoBehaviour:
     thumbnail: {fileID: 21300000, guid: f4c20e87092614e5db9d8a423e9579a2, type: 3}
     leadsToProfile: 0
     profile: {fileID: 0}
-    fakeUrl: www.jabermunnaCloth.com.bd
+    fakeUrl: www.jabermunnacloth.com.bd
   - title: Freakbook | Jaber Molla
     description: Find your freakbook friends here
     thumbnail: {fileID: 21300000, guid: f4c20e87092614e5db9d8a423e9579a2, type: 3}
