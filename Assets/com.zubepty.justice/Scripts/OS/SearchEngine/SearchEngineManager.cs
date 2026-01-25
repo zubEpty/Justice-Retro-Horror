@@ -32,31 +32,35 @@ public class SearchEngineManager : MonoBehaviour
         _SearchResultPage.SetActive(true);
         _uriText.text = input;
 
-        // Clear old results
-        foreach (Transform child in resultsParent)
-            Destroy(child.gameObject);
-
-        // Find matching search data
-        SearchResultData matchedData = allSearchResults.FirstOrDefault(data =>
-            data.queryKeywords.Any(keyword =>
-                input.Contains(keyword.ToLower())
-            )
-        );
-
-        if (matchedData != null)
+        // Start fake browser loading
+        BrowserLoadingUi.Instance.Load(() =>
         {
-            NoResultPage.SetActive(false);
+            // Clear old results AFTER loading
+            foreach (Transform child in resultsParent)
+                Destroy(child.gameObject);
 
-            foreach (var entry in matchedData.results)
+            // Find matching search data
+            SearchResultData matchedData = allSearchResults.FirstOrDefault(data =>
+                data.queryKeywords.Any(keyword =>
+                    input.Contains(keyword.ToLower())
+                )
+            );
+
+            if (matchedData != null)
             {
-                var go = Instantiate(resultPrefab, resultsParent);
-                go.GetComponent<ResultUI>().Setup(entry);
+                NoResultPage.SetActive(false);
+
+                foreach (var entry in matchedData.results)
+                {
+                    var go = Instantiate(resultPrefab, resultsParent);
+                    go.GetComponent<ResultUI>().Setup(entry);
+                }
             }
-        }
-        else
-        {
-            NoResultPage.SetActive(true);
-        }
+            else
+            {
+                NoResultPage.SetActive(true);
+            }
+        });
 
     }
 }

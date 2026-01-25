@@ -27,24 +27,36 @@ public class ResultUI : MonoBehaviour
 
     void OnClickOpen()
     {
-        switch (_entry.target)
+        BrowserLoadingUi.Instance.Load(() =>
         {
-            case SearchResultTarget.FacebookProfile:
-                if (_entry.profile != null)
-                    FakeProfileUI.Instance.ShowProfile(_entry.profile, _entry.fakeUrl);
-                else
-                    FakeProfileUI.Instance.ShowErrorResultsUi(_entry.fakeUrl);
-                break;
+            switch (_entry.target)
+            {
+                case SearchResultTarget.FacebookProfile:
+                    if (_entry.profile != null)
+                        FakeProfileUI.Instance.ShowProfile(
+                            _entry.profile,
+                            _entry.fakeUrl
+                        );
+                    else
+                        FakeProfileUI.Instance.ShowErrorResultsUi(
+                            _entry.fakeUrl
+                        );
+                    break;
 
-            case SearchResultTarget.NewsArticle:
-                Debug.Log($"Data is {_entry.newsData}{_entry.fakeUrl}");
-                FakeNewsUI.Instance.OpenArticle(_entry.newsData, _entry.fakeUrl);
-                break;
+                case SearchResultTarget.NewsArticle:
+                    FakeNewsUI.Instance.OpenArticle(
+                        _entry.newsData,
+                        _entry.fakeUrl
+                    );
+                    break;
 
-            case SearchResultTarget.Error404:
-            default:
-                FakeProfileUI.Instance.ShowErrorResultsUi(_entry.fakeUrl);
-                break;
-        }
+                case SearchResultTarget.Error404:
+                default:
+                    FakeProfileUI.Instance.ShowErrorResultsUi(
+                        _entry.fakeUrl
+                    );
+                    break;
+            }
+        });
     }
 }

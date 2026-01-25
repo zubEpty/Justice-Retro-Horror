@@ -19,7 +19,7 @@ MonoBehaviour:
   results:
   - title: Freakbook | Daniel Robert
     description: Find your freakbook friends here
-    thumbnail: {fileID: 21300000, guid: f4c20e87092614e5db9d8a423e9579a2, type: 3}
+    thumbnail: {fileID: 21300000, guid: 6db28286ae7648944bdb7198a1e09bc2, type: 3}
     target: 0
     profile: {fileID: 11400000, guid: 231ea3ee388e4794c9325d764b47a6c7, type: 2}
     newsData: {fileID: 11400000, guid: 4954b5cd9f69f1a499eeca5668320266, type: 2}
@@ -27,8 +27,8 @@ MonoBehaviour:
   - title: Local Teen Missing After School, Investigation Ongoing
     description: Police are investigating the disappearance of Daniel, a high-school
       student from a well-known and wealthy family..
-    thumbnail: {fileID: 0}
+    thumbnail: {fileID: 21300000, guid: f3b17f604267d62439096cf3042d4f0b, type: 3}
     target: 1
     profile: {fileID: 0}
     newsData: {fileID: 11400000, guid: 4954b5cd9f69f1a499eeca5668320266, type: 2}
-    fakeUrl: newstoday.com/missing
+    fakeUrl: cbbnews.com/missing-report.php
