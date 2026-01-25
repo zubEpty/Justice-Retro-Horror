@@ -24,22 +24,39 @@ public class SearchEngineManager : MonoBehaviour
 
     public void OnSearch()
     {
-        if (searchInput.text != String.Empty)
-        {
-            string input = searchInput.text.ToLower().Trim();
-            _SearchResultPage.SetActive(true);
-            var data = allSearchResults.FirstOrDefault(r => r.queryKeyword.ToLower() == input);
-            foreach (Transform child in resultsParent) Destroy(child.gameObject);
+        string input = searchInput.text.ToLower().Trim();
 
-            if (data != null)
+        if (string.IsNullOrEmpty(input))
+            return;
+
+        _SearchResultPage.SetActive(true);
+        _uriText.text = input;
+
+        // Clear old results
+        foreach (Transform child in resultsParent)
+            Destroy(child.gameObject);
+
+        // Find matching search data
+        SearchResultData matchedData = allSearchResults.FirstOrDefault(data =>
+            data.queryKeywords.Any(keyword =>
+                input.Contains(keyword.ToLower())
+            )
+        );
+
+        if (matchedData != null)
+        {
+            NoResultPage.SetActive(false);
+
+            foreach (var entry in matchedData.results)
             {
-                foreach (var entry in data.results)
-                {
-                    var go = Instantiate(resultPrefab, resultsParent);
-                    go.GetComponent<ResultUI>().Setup(entry);
-                }
+                var go = Instantiate(resultPrefab, resultsParent);
+                go.GetComponent<ResultUI>().Setup(entry);
             }
         }
-      
+        else
+        {
+            NoResultPage.SetActive(true);
+        }
+
     }
 }

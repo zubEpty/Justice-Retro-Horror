@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3466877124920385373}
   - component: {fileID: 7194559858261697639}
   - component: {fileID: 5485501490532855844}
-  - component: {fileID: 7094292470782250160}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -76,19 +75,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7094292470782250160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 333886714113066696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8d3e9ba02f15cb42a7668a8efaac950, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ImageThumbnail
-  thumbnailImage: {fileID: 5485501490532855844}
 --- !u!1 &3439718757661958697
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +386,7 @@ PrefabInstance:
     - target: {fileID: 1633663483710074167, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 7094292470782250160}
+      objectReference: {fileID: 7604552746001314310}
     - target: {fileID: 1633663483710074167, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -602,6 +588,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9053081622194663879, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7084361211301292672}
+    - targetCorrespondingSourceObject: {fileID: 9053081622194663879, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7604552746001314310}
   m_SourcePrefab: {fileID: 100100000, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
 --- !u!1 &837902284333579325 stripped
 GameObject:
@@ -622,6 +611,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   postText: {fileID: 8264407944402851251}
   postImage: {fileID: 5485501490532855844}
+--- !u!114 &7604552746001314310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837902284333579325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8d3e9ba02f15cb42a7668a8efaac950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImageThumbnail
+  thumbnailImage: {fileID: 5485501490532855844}
 --- !u!224 &1282893886520631940 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7479937215450214270, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}

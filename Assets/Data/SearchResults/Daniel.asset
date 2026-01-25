@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e069b5e12e6a1cf469f33f2342ab127b, type: 3}
+  m_Name: Daniel
+  m_EditorClassIdentifier: Assembly-CSharp::SearchResultData
+  queryKeywords:
+  - danny
+  - daniel
+  - missing
+  results:
+  - title: Local Teen Missing After School, Investigation Ongoing
+    description: Police are investigating the disappearance of Daniel, a high-school
+      student from a well-known and wealthy family..
+    thumbnail: {fileID: 0}
+    target: 1
+    profile: {fileID: 0}
+    newsData: {fileID: 11400000, guid: 4954b5cd9f69f1a499eeca5668320266, type: 2}
+    fakeUrl: newstoday.com/missing

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8c3aaff6426de4bb5da5734b8440a2, type: 3}
+  m_Name: Danny's Missing
+  m_EditorClassIdentifier: Assembly-CSharp::NewsArticleData
+  newsImage: {fileID: 21300000, guid: cb3cf05fb950d504e86a709d9ff94cf5, type: 3}
+  title: Locall Teen Missing After School, Investigation Ongoing
+  description: "Police are investigating the disappearance of Daniel, a high-school
+    student from a well-known and wealthy family, who was reported missing late Tuesday
+    evening. According to authorities, Daniel was last seen leaving school grounds
+    after regular classes and never returned home.\n\nSchool officials describe Daniel
+    as a model student\u2014academically successful, well-behaved, and highly regarded
+    by both teachers and classmates. \u201CHe was polite, disciplined, and never
+    caused trouble,\u201D said one staff member. Friends echoed the sentiment, calling
+    him \u201Cquiet\u201D and \u201Cfocused on his future.\u201D\n\nDespite an active
+    investigation, police have so far found no physical evidence indicating Daniel\u2019s
+    whereabouts. Search efforts around the school and nearby areas have yielded no
+    results, and authorities have not ruled out any possibilities. Investigators
+    are urging anyone with information, no matter how small, to come forward as concern
+    grows within the community."

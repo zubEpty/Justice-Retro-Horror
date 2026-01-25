@@ -4,7 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SearchResultData", menuName = "FakeSearch/SearchResult")]
 public class SearchResultData : ScriptableObject
 {
-    public string queryKeyword;
+    [Header("Keywords that trigger this result")]
+    public List<string> queryKeywords; 
     public List<SearchResultEntry> results;
 }
 
@@ -14,10 +15,22 @@ public class SearchResultEntry
     public string title;
     public string description;
     public Sprite thumbnail;
-    public bool leadsToProfile;
-    public FakeProfile profile; // link to a profile if this is the correct entry
 
-    [Header("Optional UI Details")]
-    public string fakeUrl; // e.g. www.nathansocial.net/profile
+    [Header("Navigation")]
+    public SearchResultTarget target;
 
+    [Header("Target Data")]
+    public FakeProfile profile;        // Facebook
+    public NewsArticleData newsData;    // News
+    public string fakeUrl;
+
+}
+
+public enum SearchResultTarget
+{
+    FacebookProfile,
+    NewsArticle,
+    MissingReport,
+    CCTVPage,
+    Error404
 }

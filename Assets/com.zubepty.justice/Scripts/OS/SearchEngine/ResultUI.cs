@@ -27,14 +27,24 @@ public class ResultUI : MonoBehaviour
 
     void OnClickOpen()
     {
-        if (_entry.leadsToProfile && _entry.profile != null)
+        switch (_entry.target)
         {
-            // Open fake social media profile
-            FakeProfileUI.Instance.ShowProfile(_entry.profile, _entry.fakeUrl);
-        }
-        else
-        {
-            FakeProfileUI.Instance.ShowErrorResultsUi(_entry.fakeUrl);
+            case SearchResultTarget.FacebookProfile:
+                if (_entry.profile != null)
+                    FakeProfileUI.Instance.ShowProfile(_entry.profile, _entry.fakeUrl);
+                else
+                    FakeProfileUI.Instance.ShowErrorResultsUi(_entry.fakeUrl);
+                break;
+
+            case SearchResultTarget.NewsArticle:
+                Debug.Log($"Data is {_entry.newsData}{_entry.fakeUrl}");
+                FakeNewsUI.Instance.OpenArticle(_entry.newsData, _entry.fakeUrl);
+                break;
+
+            case SearchResultTarget.Error404:
+            default:
+                FakeProfileUI.Instance.ShowErrorResultsUi(_entry.fakeUrl);
+                break;
         }
     }
 }
