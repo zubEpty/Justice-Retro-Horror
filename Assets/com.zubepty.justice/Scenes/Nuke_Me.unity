@@ -1113,6 +1113,7 @@ GameObject:
   - component: {fileID: 31261100}
   - component: {fileID: 31261102}
   - component: {fileID: 31261101}
+  - component: {fileID: 31261103}
   m_Layer: 5
   m_Name: Home - Shuffle
   m_TagString: Untagged
@@ -1173,6 +1174,34 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &31261103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31261099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7f660805844d70afda4b5a93a3e5ab, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  shuffleContainer: {fileID: 596752405}
+  puzzleContainer: {fileID: 323272040}
+  successContainer: {fileID: 295582519}
+  hintCanvasGroup: {fileID: 470411327}
+  hintText: {fileID: 470411325}
+  submitButton: {fileID: 1985135917}
+  downloadLicenseButton: {fileID: 173286878}
+  licenseButton: {fileID: 1179068793}
+  wrongTriesBeforeHint: 3
+  dropDuration: 0.18
+  hintMessage: 'Hint: Put the suits in this order: Heart, Diamond, Circle, Star.'
+  correctOrder:
+  - 0
+  - 1
+  - 2
+  - 3
 --- !u!222 &31261102
 CanvasRenderer:
   m_ObjectHideFlags: 0

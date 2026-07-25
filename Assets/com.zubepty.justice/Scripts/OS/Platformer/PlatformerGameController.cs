@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
@@ -11,6 +12,8 @@ public sealed class PlatformerGameController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI statusText;
     [SerializeField] private RectTransform collapsingPlatform;
     [SerializeField] private RectTransform[] platforms;
+    [SerializeField] private GameObject gameWindow;
+    [SerializeField] private GameObject nextGameWindow;
 
     [SerializeField] private float moveSpeed = 360f;
     [SerializeField] private float jumpVelocity = 560f;
@@ -20,6 +23,7 @@ public sealed class PlatformerGameController : MonoBehaviour
     [SerializeField] private float goalGateDropDistance = 145f;
     [SerializeField] private float goalGateGraceTime = 0.18f;
     [SerializeField] private float resetDelay = 0.45f;
+    [SerializeField] private float nextGameDelay = 0.45f;
 
     private Vector2 velocity;
     private Vector2 startPosition;
@@ -32,15 +36,18 @@ public sealed class PlatformerGameController : MonoBehaviour
     private bool goalGateReturning;
     private bool goalGateReady;
     private bool resetting;
+    private bool handoffStarted;
     private float resetTimer;
     private float goalGateGraceTimer;
 
-    public void Configure(RectTransform playerRect, RectTransform goalRect, TextMeshProUGUI statusLabel, RectTransform trapPlatform, params RectTransform[] platformRects)
+    public void Configure(RectTransform playerRect, RectTransform goalRect, TextMeshProUGUI statusLabel, RectTransform trapPlatform, GameObject currentWindow, GameObject nextWindow, params RectTransform[] platformRects)
     {
         player = playerRect;
         goal = goalRect;
         statusText = statusLabel;
         collapsingPlatform = trapPlatform;
+        gameWindow = currentWindow;
+        nextGameWindow = nextWindow;
         platforms = platformRects;
         startPosition = player.anchoredPosition;
         goalStartPosition = goal.anchoredPosition;
@@ -315,6 +322,38 @@ public sealed class PlatformerGameController : MonoBehaviour
         {
             statusText.text = "Welcome.";
             statusText.color = new Color(0.35f, 1f, 0.52f, 1f);
+        }
+
+        StartNextGameHandoff();
+    }
+
+    private void StartNextGameHandoff()
+    {
+        if (handoffStarted)
+        {
+            return;
+        }
+
+        handoffStarted = true;
+        StartCoroutine(NextGameHandoffRoutine());
+    }
+
+    private IEnumerator NextGameHandoffRoutine()
+    {
+        if (nextGameDelay > 0f)
+        {
+            yield return new WaitForSecondsRealtime(nextGameDelay);
+        }
+
+        if (nextGameWindow != null)
+        {
+            nextGameWindow.SetActive(true);
+            nextGameWindow.transform.SetAsLastSibling();
+        }
+
+        if (gameWindow != null)
+        {
+            gameWindow.SetActive(false);
         }
     }
 

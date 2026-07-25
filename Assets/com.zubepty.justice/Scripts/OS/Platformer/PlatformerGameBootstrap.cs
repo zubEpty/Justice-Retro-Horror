@@ -7,6 +7,7 @@ public sealed class PlatformerGameBootstrap
 {
     private const string SceneName = "Nuke_Me";
     private const string WindowName = "Platformer-Game";
+    private const string NextGameWindowName = "Home - Shuffle";
     private const string ContainerName = "Container";
     private const string RuntimeRootName = "PlatformerRuntimeRoot";
 
@@ -26,6 +27,8 @@ public sealed class PlatformerGameBootstrap
         {
             return;
         }
+
+        RectTransform nextGameWindow = FindRectTransform(activeScene, NextGameWindowName);
 
         RectTransform container = FindDirectChild(window, ContainerName);
 
@@ -63,7 +66,7 @@ public sealed class PlatformerGameBootstrap
         statusRect.sizeDelta = new Vector2(-32f, 48f);
 
         PlatformerGameController controller = root.gameObject.AddComponent<PlatformerGameController>();
-        controller.Configure(player, goal, statusText, trapFloor, floorLeft, floorRight, ledgeOne, ledgeTwo);
+        controller.Configure(player, goal, statusText, trapFloor, window.gameObject, nextGameWindow != null ? nextGameWindow.gameObject : null, floorLeft, floorRight, ledgeOne, ledgeTwo);
     }
 
     private static RectTransform FindRectTransform(Scene scene, string objectName)
