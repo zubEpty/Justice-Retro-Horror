@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e069b5e12e6a1cf469f33f2342ab127b, type: 3}
+  m_Name: GMTK
+  m_EditorClassIdentifier: 
+  queryKeywords:
+  - gmtk
+  - game jam
+  - itch
+  results:
+  - title: GMTK Game Jam 2026
+    description: gmtk game jam from 2026. This year the theme is countdown
+    thumbnail: {fileID: 21300000, guid: d28a8586c2311734093130f0f34983e1, type: 3}
+    page: {fileID: 11400000, guid: 2f19dce221a3c6342ad6b76774ae923b, type: 2}
+    target: 1
+    profile: {fileID: 0}
+    newsData: {fileID: 0}
+    fakeUrl: https://itch.io/jam/gmtk-jam-2026
+  - title: Get My Things Karen!! Watch live stream right now!!
+    description: Number 1 movie streaming site absolutely for free
+    thumbnail: {fileID: 21300000, guid: f4c20e87092614e5db9d8a423e9579a2, type: 3}
+    page: {fileID: 0}
+    target: 4
+    profile: {fileID: 0}
+    newsData: {fileID: 0}
+    fakeUrl: www.movienights.com
+  - title: TubeYou.com | GMTK
+    description: Game Maker's Toolkit is a deep dive into game design, level design,
+      and game production, hosted by Mark Brown.
+    thumbnail: {fileID: 21300000, guid: f4c20e87092614e5db9d8a423e9579a2, type: 3}
+    page: {fileID: 0}
+    target: 4
+    profile: {fileID: 0}
+    newsData: {fileID: 0}
+    fakeUrl: www.TubeYou.com/gmtk

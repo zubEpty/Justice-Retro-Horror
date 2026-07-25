@@ -25,12 +25,20 @@ MonoBehaviour:
     target: 4
     profile: {fileID: 0}
     newsData: {fileID: 0}
-    fakeUrl: www.jabermunnacloth.com.bd
+    fakeUrl: www.virus.com
   - title: BEGULAVAST | POPULAR ANTIVIRUS
-    description: Pop
-    thumbnail: {fileID: 21300000, guid: f4c20e87092614e5db9d8a423e9579a2, type: 3}
+    description: Top popular antivirus and free to download
+    thumbnail: {fileID: 21300000, guid: ffedd3714c1e8cb4b86f51c0ee87a220, type: 3}
     page: {fileID: 11400000, guid: ed17a116cec28fa4f92a2f522ec79cde, type: 2}
     target: 1
     profile: {fileID: 0}
     newsData: {fileID: 0}
     fakeUrl: www.sussybaka.com/begulavast
+  - title: TOP 10 Things to do when your computer has virus
+    description: Details description about computer viruses and how to mitigate them
+    thumbnail: {fileID: 21300000, guid: f4c20e87092614e5db9d8a423e9579a2, type: 3}
+    page: {fileID: 0}
+    target: 4
+    profile: {fileID: 0}
+    newsData: {fileID: 0}
+    fakeUrl: www.vlog.com
