@@ -14,9 +14,9 @@ public class WindowFocusHandler : MonoBehaviour, IPointerDownHandler
     [SerializeField] private float ransomwareTimerSlideDistance = 520f;
     [SerializeField] private float ransomwareTimerSlideDuration = 0.45f;
 
-    private Coroutine ransomwareTimerRoutine;
     private bool hasRansomwareTimerHiddenPosition;
     private Vector2 ransomwareTimerHiddenPosition;
+    private static RansomwareTimerRunner ransomwareTimerRunner;
 
     private bool IsAlertWindow => isAlert || gameObject.name.StartsWith("Alert Panel");
 
@@ -48,13 +48,21 @@ public class WindowFocusHandler : MonoBehaviour, IPointerDownHandler
 
     private void StartRansomwareTimer()
     {
-        if (ransomwareTimerRoutine != null)
-            StopCoroutine(ransomwareTimerRoutine);
-
-        ransomwareTimerRoutine = StartCoroutine(RansomwareTimerSequence());
+        RansomwareTimerRunner timerRunner = GetRansomwareTimerRunner();
+        timerRunner.StartTimer(this, ransomwareTimerDelay, ransomwareTimerDurationSeconds, ransomwareTimerSlideDistance, ransomwareTimerSlideDuration);
     }
 
-    private IEnumerator RansomwareTimerSequence()
+    private static RansomwareTimerRunner GetRansomwareTimerRunner()
+    {
+        if (ransomwareTimerRunner != null)
+            return ransomwareTimerRunner;
+
+        GameObject runnerObject = new GameObject("RansomwareTimerRunner");
+        ransomwareTimerRunner = runnerObject.AddComponent<RansomwareTimerRunner>();
+        return ransomwareTimerRunner;
+    }
+
+    internal IEnumerator RansomwareTimerSequence(float timerDelay, float timerDurationSeconds, float timerSlideDistance, float timerSlideDuration)
     {
         GameObject timerObject = FindSceneGameObject("Timer");
         GameObject gameOverPanel = FindSceneGameObject("Gameover_panel");
@@ -83,18 +91,18 @@ public class WindowFocusHandler : MonoBehaviour, IPointerDownHandler
             gameOverPanel.SetActive(false);
 
         if (timerText != null)
-            timerText.text = FormatTime(ransomwareTimerDurationSeconds);
+            timerText.text = FormatTime(timerDurationSeconds);
 
-        yield return new WaitForSeconds(ransomwareTimerDelay);
+        yield return new WaitForSeconds(timerDelay);
 
         timerObject.SetActive(true);
         timerObject.transform.SetAsLastSibling();
         BringActiveAlertsToFront();
 
         if (timerRect != null)
-            yield return SlideTimerIntoView(timerRect);
+            yield return SlideTimerIntoView(timerRect, timerSlideDistance, timerSlideDuration);
 
-        float remainingSeconds = ransomwareTimerDurationSeconds;
+        float remainingSeconds = timerDurationSeconds;
 
         while (remainingSeconds > 0f)
         {
@@ -115,18 +123,17 @@ public class WindowFocusHandler : MonoBehaviour, IPointerDownHandler
         }
 
         BringActiveAlertsToFront();
-        ransomwareTimerRoutine = null;
     }
 
-    private IEnumerator SlideTimerIntoView(RectTransform timerRect)
+    private IEnumerator SlideTimerIntoView(RectTransform timerRect, float timerSlideDistance, float timerSlideDuration)
     {
         Vector2 startPosition = timerRect.anchoredPosition;
-        Vector2 endPosition = startPosition + Vector2.left * ransomwareTimerSlideDistance;
+        Vector2 endPosition = startPosition + Vector2.left * timerSlideDistance;
         float elapsed = 0f;
 
-        while (elapsed < ransomwareTimerSlideDuration)
+        while (elapsed < timerSlideDuration)
         {
-            float progress = elapsed / ransomwareTimerSlideDuration;
+            float progress = elapsed / timerSlideDuration;
             progress = Mathf.SmoothStep(0f, 1f, progress);
             timerRect.anchoredPosition = Vector2.LerpUnclamped(startPosition, endPosition, progress);
             elapsed += Time.deltaTime;

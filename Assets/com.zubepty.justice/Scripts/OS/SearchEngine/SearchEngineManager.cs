@@ -154,6 +154,11 @@ public class SearchEngineManager : MonoBehaviour
         });
     }
 
+    public void OpenBrowserPage(GameObject page, string url)
+    {
+        LoadStaticPage(page, url);
+    }
+
     public void GoBackToHomePage()
     {
         if (IsHomePageOnlyActive())

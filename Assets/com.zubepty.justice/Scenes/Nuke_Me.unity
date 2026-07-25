@@ -2011,19 +2011,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 99211934}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1234477075}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &99211934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17483,6 +17471,7 @@ MonoBehaviour:
   - {fileID: 1732189151}
   - {fileID: 1182936518}
   - {fileID: 89432922}
+  - {fileID: 892750075}
   _gmtkPageButton: {fileID: 1480279752}
   _gmtkPage: {fileID: 1732189151}
   _gmtkUrl: www.gmtkjam.com
@@ -38069,19 +38058,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1926949879}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1234477075}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1926949879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41868,6 +41845,7 @@ GameObject:
   - component: {fileID: 2062992977}
   - component: {fileID: 2062992976}
   - component: {fileID: 2062992975}
+  - component: {fileID: 2062992978}
   m_Layer: 5
   m_Name: BegulaVIRUS
   m_TagString: Untagged
@@ -41956,6 +41934,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062992973}
   m_CullTransparentMesh: 1
+--- !u!114 &2062992978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062992973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7439fd3ecb4e64a89883c662f133b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scanButton: {fileID: 99211933}
+  licenseValidatorPanel: {fileID: 1234477075}
+  helpButton: {fileID: 1926949878}
+  searchEngineWindow: {fileID: 912574073}
+  searchEngineFocusHandler: {fileID: 912574079}
+  searchEngineManager: {fileID: 912574077}
+  antivirusHelpPage: {fileID: 892750075}
+  antivirusHelpUrl: www.antivirus.com/help
+  hackersAddressButton: {fileID: 1114911032}
+  platformerGameWindow: {fileID: 32348937}
+  platformerFocusHandler: {fileID: 0}
 --- !u!1 &2069644066
 GameObject:
   m_ObjectHideFlags: 0
