@@ -1069,6 +1069,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00a73b62a802649852f571b89b7cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowFocusHandler
+  isAlert: 0
+  ransomwareTimerDelay: 1
+  ransomwareTimerDurationSeconds: 300
+  ransomwareTimerSlideDistance: 520
+  ransomwareTimerSlideDuration: 0.45
 --- !u!114 &32401513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3914,6 +3919,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00a73b62a802649852f571b89b7cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowFocusHandler
+  isAlert: 0
+  ransomwareTimerDelay: 1
+  ransomwareTimerDurationSeconds: 300
+  ransomwareTimerSlideDistance: 520
+  ransomwareTimerSlideDuration: 0.45
 --- !u!114 &325820682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7863,6 +7873,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00a73b62a802649852f571b89b7cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowFocusHandler
+  isAlert: 0
+  ransomwareTimerDelay: 1
+  ransomwareTimerDurationSeconds: 300
+  ransomwareTimerSlideDistance: 520
+  ransomwareTimerSlideDuration: 0.45
 --- !u!114 &570608606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9077,6 +9092,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00a73b62a802649852f571b89b7cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowFocusHandler
+  isAlert: 0
+  ransomwareTimerDelay: 1
+  ransomwareTimerDurationSeconds: 300
+  ransomwareTimerSlideDistance: 520
+  ransomwareTimerSlideDuration: 0.45
 --- !u!1 &632529215
 GameObject:
   m_ObjectHideFlags: 0
@@ -11362,6 +11382,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00a73b62a802649852f571b89b7cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowFocusHandler
+  isAlert: 0
+  ransomwareTimerDelay: 1
+  ransomwareTimerDurationSeconds: 300
+  ransomwareTimerSlideDistance: 520
+  ransomwareTimerSlideDuration: 0.45
 --- !u!1001 &825152528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11890,6 +11915,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00a73b62a802649852f571b89b7cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowFocusHandler
+  isAlert: 0
+  ransomwareTimerDelay: 1
+  ransomwareTimerDurationSeconds: 300
+  ransomwareTimerSlideDistance: 520
+  ransomwareTimerSlideDuration: 0.45
 --- !u!114 &849212134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13346,6 +13376,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00a73b62a802649852f571b89b7cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowFocusHandler
+  isAlert: 0
+  ransomwareTimerDelay: 1
+  ransomwareTimerDurationSeconds: 300
+  ransomwareTimerSlideDistance: 520
+  ransomwareTimerSlideDuration: 0.45
 --- !u!114 &912574080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14023,7 +14058,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 912574079}
+      - m_Target: {fileID: 32401510}
         m_TargetAssemblyTypeName: WindowFocusHandler, Assembly-CSharp
         m_MethodName: OpenWindow
         m_Mode: 2
@@ -14314,6 +14349,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00a73b62a802649852f571b89b7cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowFocusHandler
+  isAlert: 0
+  ransomwareTimerDelay: 1
+  ransomwareTimerDurationSeconds: 300
+  ransomwareTimerSlideDistance: 520
+  ransomwareTimerSlideDuration: 0.45
 --- !u!1 &947890677
 GameObject:
   m_ObjectHideFlags: 0
@@ -15047,6 +15087,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00a73b62a802649852f571b89b7cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowFocusHandler
+  isAlert: 0
+  ransomwareTimerDelay: 1
+  ransomwareTimerDurationSeconds: 300
+  ransomwareTimerSlideDistance: 520
+  ransomwareTimerSlideDuration: 0.45
 --- !u!1 &1015197759
 GameObject:
   m_ObjectHideFlags: 0
@@ -16513,6 +16558,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00a73b62a802649852f571b89b7cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowFocusHandler
+  isAlert: 0
+  ransomwareTimerDelay: 1
+  ransomwareTimerDurationSeconds: 300
+  ransomwareTimerSlideDistance: 520
+  ransomwareTimerSlideDuration: 0.45
 --- !u!1 &1136715623
 GameObject:
   m_ObjectHideFlags: 0
@@ -19244,6 +19294,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00a73b62a802649852f571b89b7cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowFocusHandler
+  isAlert: 0
+  ransomwareTimerDelay: 1
+  ransomwareTimerDurationSeconds: 300
+  ransomwareTimerSlideDistance: 520
+  ransomwareTimerSlideDuration: 0.45
 --- !u!114 &1265018715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20308,6 +20363,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00a73b62a802649852f571b89b7cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowFocusHandler
+  isAlert: 0
+  ransomwareTimerDelay: 1
+  ransomwareTimerDurationSeconds: 300
+  ransomwareTimerSlideDistance: 520
+  ransomwareTimerSlideDuration: 0.45
 --- !u!1 &1351420622
 GameObject:
   m_ObjectHideFlags: 0
@@ -20990,6 +21050,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00a73b62a802649852f571b89b7cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowFocusHandler
+  isAlert: 0
+  ransomwareTimerDelay: 1
+  ransomwareTimerDurationSeconds: 300
+  ransomwareTimerSlideDistance: 520
+  ransomwareTimerSlideDuration: 0.45
 --- !u!1 &1382256831
 GameObject:
   m_ObjectHideFlags: 0
@@ -32500,6 +32565,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac00a73b62a802649852f571b89b7cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowFocusHandler
+  isAlert: 0
+  ransomwareTimerDelay: 1
+  ransomwareTimerDurationSeconds: 300
+  ransomwareTimerSlideDistance: 520
+  ransomwareTimerSlideDuration: 0.45
 --- !u!224 &2022057118 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7815548543115562862, guid: 71155f89d87ccbc45b141dace2febe41, type: 3}
