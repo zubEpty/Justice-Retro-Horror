@@ -288,8 +288,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -427,8 +427,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -483,8 +483,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -596,8 +596,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -5805,6 +5805,7 @@ GameObject:
   - component: {fileID: 316510312}
   - component: {fileID: 316510314}
   - component: {fileID: 316510313}
+  - component: {fileID: 316510315}
   m_Layer: 5
   m_Name: Email_content
   m_TagString: Untagged
@@ -5871,6 +5872,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316510311}
   m_CullTransparentMesh: 1
+--- !u!114 &316510315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316510311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c8e5c03d5f04a0e9817c31bd0b5361d, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  downloadButton: {fileID: 1964704311}
+  downloadController: {fileID: 912574081}
 --- !u!1 &320322232
 GameObject:
   m_ObjectHideFlags: 0
@@ -6086,7 +6101,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 322032534}
   m_OnClick:
     m_PersistentCalls:
@@ -8648,6 +8663,7 @@ GameObject:
   - component: {fileID: 430071372}
   - component: {fileID: 430071375}
   - component: {fileID: 430071374}
+  - component: {fileID: 430071376}
   - component: {fileID: 430071373}
   m_Layer: 5
   m_Name: Button_OK
@@ -8782,6 +8798,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 430071371}
   m_CullTransparentMesh: 1
+--- !u!114 &430071376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430071371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e458df3d7f4f0db3485f42cb9553f0, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  flowController: {fileID: 2062992978}
 --- !u!1 &445349004
 GameObject:
   m_ObjectHideFlags: 0
@@ -17595,7 +17624,7 @@ MonoBehaviour:
   progressFill: {fileID: 1441902037}
   okButton: {fileID: 1447932048}
   okButtonText: {fileID: 1969127863}
-  antivirusButton: {fileID: 824740379}
+  antivirusButton: {fileID: 927640541}
   downloadDuration: 6
   waitingText: Please wait...
   doneText: OK
@@ -27624,6 +27653,7 @@ GameObject:
   - component: {fileID: 1395643132}
   - component: {fileID: 1395643131}
   - component: {fileID: 1395643130}
+  - component: {fileID: 1395643133}
   m_Layer: 5
   m_Name: Btn_OK
   m_TagString: Untagged
@@ -27733,6 +27763,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395643128}
   m_CullTransparentMesh: 1
+--- !u!114 &1395643133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395643128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d890af5d9b4a7e9c64d4b268d6c2b4, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  flowController: {fileID: 2062992978}
 --- !u!1 &1398998512
 GameObject:
   m_ObjectHideFlags: 0
@@ -36262,6 +36305,7 @@ GameObject:
   - component: {fileID: 1789036561}
   - component: {fileID: 1789036563}
   - component: {fileID: 1789036562}
+  - component: {fileID: 1789036564}
   m_Layer: 5
   m_Name: Email
   m_TagString: Untagged
@@ -36329,6 +36373,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789036560}
   m_CullTransparentMesh: 1
+--- !u!114 &1789036564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789036560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb52da6d6e44ce9843f41fd5adff646, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  lindaButton: {fileID: 2119658519}
 --- !u!1 &1789115262
 GameObject:
   m_ObjectHideFlags: 0
@@ -40482,8 +40539,9 @@ GameObject:
   - component: {fileID: 1964704313}
   - component: {fileID: 1964704312}
   - component: {fileID: 1964704311}
+  - component: {fileID: 1964704314}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Btn_Virus_Download
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40584,6 +40642,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1964704314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964704309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f85b67307984683b57fbf219686294e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  downloadController: {fileID: 912574081}
 --- !u!222 &1964704313
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -43615,6 +43686,21 @@ MonoBehaviour:
   hackersAddressButton: {fileID: 1114911032}
   platformerGameWindow: {fileID: 32348937}
   platformerFocusHandler: {fileID: 0}
+  submitProjectButton: {fileID: 0}
+  submitProjectButtonText: {fileID: 0}
+  submissionConfirmationPanel: {fileID: 0}
+  submissionOkButton: {fileID: 0}
+  emailAlertPanel: {fileID: 0}
+  emailAlertRect: {fileID: 0}
+  emailAlertOkButton: {fileID: 0}
+  emailWindow: {fileID: 0}
+  emailFocusHandler: {fileID: 0}
+  lindaEmailButton: {fileID: 0}
+  emailContentPanel: {fileID: 0}
+  emailDownloadButton: {fileID: 0}
+  antivirusDownloadController: {fileID: 0}
+  emailAlertSlideDistance: 520
+  emailAlertSlideDuration: 0.45
 --- !u!1 &2069644066
 GameObject:
   m_ObjectHideFlags: 0

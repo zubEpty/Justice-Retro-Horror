@@ -21,6 +21,8 @@ public class AntivirusDownloadController : MonoBehaviour
 
     private void Awake()
     {
+        ResolveReferences();
+
         if (downloadButton != null)
             downloadButton.onClick.AddListener(StartDownload);
 
@@ -53,7 +55,11 @@ public class AntivirusDownloadController : MonoBehaviour
         {
             downloadPanel.SetActive(true);
             downloadPanel.transform.SetAsLastSibling();
+            RaiseParentsToFront(downloadPanel.transform);
         }
+
+        if (progressFill != null)
+            progressFill.fillAmount = 0f;
 
         SetOkButtonState(false, waitingText);
 
@@ -84,7 +90,11 @@ public class AntivirusDownloadController : MonoBehaviour
         downloadRoutine = null;
 
         if (antivirusButton != null)
+        {
             antivirusButton.SetActive(true);
+            antivirusButton.transform.SetAsLastSibling();
+            RaiseParentsToFront(antivirusButton.transform);
+        }
 
         SetOkButtonState(true, doneText);
     }
@@ -104,5 +114,36 @@ public class AntivirusDownloadController : MonoBehaviour
 
         if (okButtonText != null)
             okButtonText.text = label;
+    }
+
+    private void ResolveReferences()
+    {
+        if (antivirusButton == null)
+            antivirusButton = FindSceneObject("Btn_Virus");
+
+        if (antivirusButton == null)
+            antivirusButton = FindSceneObject("Btn_Antivirus");
+    }
+
+    private static GameObject FindSceneObject(string objectName)
+    {
+        GameObject[] sceneObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (GameObject sceneObject in sceneObjects)
+        {
+            if (sceneObject.name == objectName && sceneObject.scene.IsValid())
+                return sceneObject;
+        }
+
+        return null;
+    }
+
+    private static void RaiseParentsToFront(Transform child)
+    {
+        Transform current = child == null ? null : child.parent;
+        while (current != null)
+        {
+            current.SetAsLastSibling();
+            current = current.parent;
+        }
     }
 }
