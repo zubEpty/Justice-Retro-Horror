@@ -9217,6 +9217,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456513160}
   m_CullTransparentMesh: 1
+--- !u!1 &463147097
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 463147099}
+  - component: {fileID: 463147098}
+  m_Layer: 0
+  m_Name: PageHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &463147098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463147097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d14f7ce9e24bfc4aad3bf02cce3f864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SearchResultPageRegistry
+  pageBindings:
+  - definition: {fileID: 11400000, guid: ed17a116cec28fa4f92a2f522ec79cde, type: 2}
+    page: {fileID: 1182936518}
+    defaultUrl: 
+--- !u!4 &463147099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463147097}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 790.29504, y: 733.2012, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &464312111
 GameObject:
   m_ObjectHideFlags: 0
@@ -18089,6 +18137,7 @@ MonoBehaviour:
   _SearchResultPage: {fileID: 1699265259}
   _homePage: {fileID: 839408985}
   _backButton: {fileID: 2146226177}
+  _pageRegistry: {fileID: 463147098}
   _browserPages:
   - {fileID: 1699265259}
   - {fileID: 17310607}
@@ -46047,3 +46096,4 @@ SceneRoots:
   - {fileID: 70401137}
   - {fileID: 2096465986}
   - {fileID: 7394709}
+  - {fileID: 463147099}

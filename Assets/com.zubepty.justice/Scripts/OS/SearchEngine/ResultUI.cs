@@ -11,10 +11,17 @@ public class ResultUI : MonoBehaviour
     public Button openButton;
  
     private SearchResultEntry _entry;
+    private SearchEngineManager _searchEngineManager;
 
     public void Setup(SearchResultEntry entry)
     {
+        Setup(entry, FindFirstObjectByType<SearchEngineManager>());
+    }
+
+    public void Setup(SearchResultEntry entry, SearchEngineManager searchEngineManager)
+    {
         _entry = entry;
+        _searchEngineManager = searchEngineManager;
 
         titleText.text = entry.title;
         descriptionText.text = entry.description;
@@ -22,41 +29,13 @@ public class ResultUI : MonoBehaviour
         if (thumbnailImage != null && entry.thumbnail != null)
             thumbnailImage.sprite = entry.thumbnail;
 
+        openButton.onClick.RemoveListener(OnClickOpen);
         openButton.onClick.AddListener(OnClickOpen);
     }
 
     void OnClickOpen()
     {
-        BrowserLoadingUi.Instance.Load(() =>
-        {
-            switch (_entry.target)
-            {
-                case SearchResultTarget.FacebookProfile:
-                    if (_entry.profile != null)
-                        FakeProfileUI.Instance.ShowProfile(
-                            _entry.profile,
-                            _entry.fakeUrl
-                        );
-                    else
-                        FakeProfileUI.Instance.ShowErrorResultsUi(
-                            _entry.fakeUrl
-                        );
-                    break;
-
-                case SearchResultTarget.NewsArticle:
-                    FakeNewsUI.Instance.OpenArticle(
-                        _entry.newsData,
-                        _entry.fakeUrl
-                    );
-                    break;
-
-                case SearchResultTarget.Error404:
-                default:
-                    FakeProfileUI.Instance.ShowErrorResultsUi(
-                        _entry.fakeUrl
-                    );
-                    break;
-            }
-        });
+        if (_searchEngineManager != null)
+            _searchEngineManager.OpenSearchResult(_entry);
     }
 }

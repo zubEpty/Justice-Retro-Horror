@@ -16,6 +16,7 @@ public class SearchEngineManager : MonoBehaviour
     [SerializeField] private GameObject _SearchResultPage;
     [SerializeField] private GameObject _homePage;
     [SerializeField] private Button _backButton;
+    [SerializeField] private SearchResultPageRegistry _pageRegistry;
 
     [Header("Browser Pages")]
     [SerializeField] private GameObject[] _browserPages;
@@ -106,7 +107,7 @@ public class SearchEngineManager : MonoBehaviour
                 foreach (var entry in matchedData.results)
                 {
                     var go = Instantiate(resultPrefab, resultsParent);
-                    go.GetComponent<ResultUI>().Setup(entry);
+                    go.GetComponent<ResultUI>().Setup(entry, this);
                 }
             }
             else
@@ -159,6 +160,23 @@ public class SearchEngineManager : MonoBehaviour
         LoadStaticPage(page, url);
     }
 
+    public void OpenSearchResult(SearchResultEntry entry)
+    {
+        if (entry == null)
+            return;
+
+        BrowserLoadingUi.Instance.Load(() =>
+        {
+            if (entry.page != null)
+            {
+                OpenPageDefinition(entry);
+                return;
+            }
+
+            OpenLegacyTarget(entry);
+        });
+    }
+
     public void GoBackToHomePage()
     {
         if (IsHomePageOnlyActive())
@@ -181,16 +199,7 @@ public class SearchEngineManager : MonoBehaviour
 
         BrowserLoadingUi.Instance.Load(() =>
         {
-            HideBrowserPages();
-
-            if (_homePage != null)
-                _homePage.SetActive(false);
-
-            page.SetActive(true);
-
-            FakeNewsUI newsPage = page.GetComponent<FakeNewsUI>();
-            if (newsPage != null)
-                newsPage.ShowPage();
+            ShowStaticPage(page);
         });
     }
 
@@ -230,5 +239,125 @@ public class SearchEngineManager : MonoBehaviour
 
         if (searchInput != null)
             searchInput.text = string.Empty;
+    }
+
+    private void OpenPageDefinition(SearchResultEntry entry)
+    {
+        switch (entry.page.PageKind)
+        {
+            case SearchResultPageKind.Profile:
+                OpenProfile(entry);
+                break;
+
+            case SearchResultPageKind.NewsArticle:
+                OpenNewsArticle(entry);
+                break;
+
+            case SearchResultPageKind.ScenePage:
+                OpenRegisteredScenePage(entry);
+                break;
+
+            case SearchResultPageKind.ErrorPage:
+            default:
+                OpenErrorPage(entry);
+                break;
+        }
+    }
+
+    private void OpenLegacyTarget(SearchResultEntry entry)
+    {
+        switch (entry.target)
+        {
+            case SearchResultTarget.FacebookProfile:
+                OpenProfile(entry);
+                break;
+
+            case SearchResultTarget.NewsArticle:
+                OpenNewsArticle(entry);
+                break;
+
+            case SearchResultTarget.Error404:
+            default:
+                OpenErrorPage(entry);
+                break;
+        }
+    }
+
+    private void OpenRegisteredScenePage(SearchResultEntry entry)
+    {
+        if (_pageRegistry == null || !_pageRegistry.TryGetPage(entry.page, out GameObject page, out string defaultUrl))
+        {
+            OpenErrorPage(entry);
+            return;
+        }
+
+        string url = string.IsNullOrWhiteSpace(entry.fakeUrl) ? defaultUrl : entry.fakeUrl;
+        SetUrl(url);
+        ShowStaticPage(page);
+    }
+
+    private void OpenProfile(SearchResultEntry entry)
+    {
+        SetUrl(entry.fakeUrl);
+        HideBrowserPages();
+
+        if (_homePage != null)
+            _homePage.SetActive(false);
+
+        if (NoResultPage != null)
+            NoResultPage.SetActive(false);
+
+        if (entry.profile != null)
+            FakeProfileUI.Instance.ShowProfile(entry.profile, entry.fakeUrl);
+        else
+            OpenErrorPage(entry);
+    }
+
+    private void OpenNewsArticle(SearchResultEntry entry)
+    {
+        if (entry.newsData == null)
+        {
+            OpenErrorPage(entry);
+            return;
+        }
+
+        SetUrl(entry.fakeUrl);
+        HideBrowserPages();
+
+        if (_homePage != null)
+            _homePage.SetActive(false);
+
+        if (NoResultPage != null)
+            NoResultPage.SetActive(false);
+
+        FakeNewsUI.Instance.OpenArticle(entry.newsData, entry.fakeUrl);
+    }
+
+    private void OpenErrorPage(SearchResultEntry entry)
+    {
+        SetUrl(entry.fakeUrl);
+        HideBrowserPages();
+
+        if (_homePage != null)
+            _homePage.SetActive(false);
+
+        FakeProfileUI.Instance.ShowErrorResultsUi(entry.fakeUrl);
+    }
+
+    private void ShowStaticPage(GameObject page)
+    {
+        HideBrowserPages();
+
+        if (_homePage != null)
+            _homePage.SetActive(false);
+
+        if (NoResultPage != null)
+            NoResultPage.SetActive(false);
+
+        page.SetActive(true);
+
+        FakeNewsUI newsPage = page.GetComponent<FakeNewsUI>();
+        if (newsPage != null)
+            newsPage.ShowPage();
     }
 }

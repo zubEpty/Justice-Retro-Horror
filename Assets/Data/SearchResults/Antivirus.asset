@@ -21,13 +21,15 @@ MonoBehaviour:
   - title: YOUR COMPUTER HAS VIRUS!!!!!!!!
     description: Number 1 Top cloth branding in Bangladesh
     thumbnail: {fileID: 21300000, guid: f4c20e87092614e5db9d8a423e9579a2, type: 3}
+    page: {fileID: 0}
     target: 4
     profile: {fileID: 0}
     newsData: {fileID: 0}
     fakeUrl: www.jabermunnacloth.com.bd
   - title: BEGULAVAST | POPULAR ANTIVIRUS
-    description: Find your freakbook friends here
+    description: Pop
     thumbnail: {fileID: 21300000, guid: f4c20e87092614e5db9d8a423e9579a2, type: 3}
+    page: {fileID: 11400000, guid: ed17a116cec28fa4f92a2f522ec79cde, type: 2}
     target: 1
     profile: {fileID: 0}
     newsData: {fileID: 0}

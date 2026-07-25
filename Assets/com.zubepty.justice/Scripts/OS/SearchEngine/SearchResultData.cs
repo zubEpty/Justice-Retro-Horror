@@ -17,6 +17,10 @@ public class SearchResultEntry
     public Sprite thumbnail;
 
     [Header("Navigation")]
+    public SearchResultPageDefinition page;
+
+    [Header("Legacy Navigation")]
+    [Tooltip("Fallback for older assets. New results should use Page instead.")]
     public SearchResultTarget target;
 
     [Header("Target Data")]
