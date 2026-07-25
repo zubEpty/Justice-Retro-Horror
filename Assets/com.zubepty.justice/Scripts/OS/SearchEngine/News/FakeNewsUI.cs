@@ -19,8 +19,6 @@ public class FakeNewsUI : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
-        else
-            Destroy(gameObject);
 
         rootPanel.SetActive(false);
     }
@@ -35,6 +33,11 @@ public class FakeNewsUI : MonoBehaviour
         descriptionText.text = data.description;
         urlText.text = fakeUrl;
 
+        rootPanel.SetActive(true);
+    }
+
+    public void ShowPage()
+    {
         rootPanel.SetActive(true);
     }
 
