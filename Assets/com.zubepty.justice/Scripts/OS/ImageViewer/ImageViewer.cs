@@ -17,6 +17,7 @@ public class ImageViewer : MonoBehaviour
     public void ShowImage(Sprite sprite)
     {
         fullImage.sprite = sprite;
+        fullImage.preserveAspect = true;
         windowRoot.SetActive(true);
         windowRoot.transform.SetAsLastSibling(); // bring to front
     }

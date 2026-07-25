@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3466877124920385373
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32,10 +32,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1282893886520631940}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 138.32782, y: -161.14728}
-  m_SizeDelta: {x: 256.6555, y: 240.3566}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -14}
+  m_SizeDelta: {x: 0, y: 220.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7194559858261697639
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 385c91bbc11a766429fca6a1fcd80b11, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b0e95604e7c6bf7468678a64eac88e2c, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -184,9 +184,9 @@ RectTransform:
   - {fileID: 7783101189421276145}
   m_Father: {fileID: 1282893886520631940}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 259.88147, y: -301.1}
   m_SizeDelta: {x: 499.7629, y: 24.2789}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6828405125365864412
@@ -330,6 +330,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -371,6 +372,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 338545437369374793, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
+      propertyPath: m_text
+      value: 'Dude!! What''s this man?? Someone just gave me only single playing
+        card for my birthday '
+      objectReference: {fileID: 0}
     - target: {fileID: 338545437369374793, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_margin.x
       value: 0
@@ -440,28 +446,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6393637691380824773, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6393637691380824773, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6393637691380824773, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6393637691380824773, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 438.44
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 6393637691380824773, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 25.969
+      value: 49.1337
       objectReference: {fileID: 0}
     - target: {fileID: 6393637691380824773, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6393637691380824773, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -33.443542
       objectReference: {fileID: 0}
     - target: {fileID: 7385445760806513180, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_AnchorMax.y
@@ -517,7 +527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7479937215450214270, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 178.367
+      value: 323.52
       objectReference: {fileID: 0}
     - target: {fileID: 7479937215450214270, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_LocalPosition.x
@@ -571,15 +581,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8101820908525827714, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
+      propertyPath: descriptionText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9053081622194663879, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       propertyPath: m_Name
       value: PostPrefab Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 1909408545363170364, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 3295279066001995929, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7479937215450214270, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
-      insertIndex: 1
+      insertIndex: -1
       addedObject: {fileID: 3466877124920385373}
     - targetCorrespondingSourceObject: {fileID: 7479937215450214270, guid: edb227d30b7e7204b9709fcd90bcce62, type: 3}
       insertIndex: -1

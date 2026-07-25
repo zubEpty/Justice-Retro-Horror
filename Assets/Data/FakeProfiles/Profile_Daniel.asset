@@ -19,13 +19,13 @@ MonoBehaviour:
   - Sam
   - Linda
   previousPosts:
-  - postText: "Feeling grateful today.\nNot everyone gets the opportunities I do.\nGonna
-      make my parents proud. \U0001F64F"
-    postImage: {fileID: 0}
+  - postText: "High Ridge basketball club \nGreat teamwork today."
+    postImage: {fileID: 21300000, guid: b0e95604e7c6bf7468678a64eac88e2c, type: 3}
   - postText: 'Honored to receive another certificate today.
 
       Thanks to my
       teachers for believing in me.'
     postImage: {fileID: 21300000, guid: c867404636a43af489795cedd6b4f11a, type: 3}
-  - postText: "High Ridge basketball club \U0001F4AA\nGreat teamwork today."
-    postImage: {fileID: 21300000, guid: b0e95604e7c6bf7468678a64eac88e2c, type: 3}
+  - postText: Dude!! What's this man?? Someone just gave me only single playing card
+      for my birthday.
+    postImage: {fileID: 21300000, guid: ac3c41caf0f55ca4ab48e5397fb7d80b, type: 3}
