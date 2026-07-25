@@ -25317,7 +25317,7 @@ GameObject:
   - component: {fileID: 1441902038}
   - component: {fileID: 1441902037}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30734,7 +30734,7 @@ GameObject:
   - component: {fileID: 1739809257}
   - component: {fileID: 1739809256}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Progressbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
