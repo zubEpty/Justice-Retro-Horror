@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ImageViewer : MonoBehaviour
@@ -12,6 +13,11 @@ public class ImageViewer : MonoBehaviour
     {
         Instance = this;
         windowRoot.SetActive(false);
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ShowImage(Sprite sprite)

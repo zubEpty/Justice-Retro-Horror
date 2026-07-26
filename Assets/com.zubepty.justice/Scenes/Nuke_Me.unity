@@ -27007,7 +27007,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -898.4, y: -31.5}
+  m_AnchoredPosition: {x: -898.4, y: -68}
   m_SizeDelta: {x: 92.461, y: 70.724}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1191608468
@@ -34389,16 +34389,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484908671}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1520966748}
+  m_Father: {fileID: 1964690916}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 21.759033, y: 29.79}
+  m_AnchoredPosition: {x: 21.759033, y: -38.466957}
   m_SizeDelta: {x: -311.547, y: 53.736}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1484908673
@@ -34881,7 +34881,6 @@ RectTransform:
   - {fileID: 828229327}
   - {fileID: 1964690916}
   - {fileID: 1507181295}
-  - {fileID: 1484908672}
   m_Father: {fileID: 635530168}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -42735,7 +42734,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1830021865}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7394708}
+        m_TargetAssemblyTypeName: ImageViewer, Assembly-CSharp
+        m_MethodName: RestartScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1830021865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45932,11 +45943,12 @@ RectTransform:
   - {fileID: 89432923}
   - {fileID: 1704728656}
   - {fileID: 1691382861}
-  - {fileID: 1362902256}
   - {fileID: 32348938}
   - {fileID: 31261100}
   - {fileID: 1234841832}
   - {fileID: 1789036561}
+  - {fileID: 1484908672}
+  - {fileID: 1362902256}
   m_Father: {fileID: 1520966748}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
