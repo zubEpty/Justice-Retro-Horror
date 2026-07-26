@@ -36,7 +36,10 @@ public class WindowFocusHandler : MonoBehaviour, IPointerDownHandler
         BringActiveAlertsToFront();
 
         if (window.name == "Ransomware_Window")
+        {
             StartRansomwareTimer();
+            VirusGlitchSequenceRunner.PlayOnce(window);
+        }
     }
 
 
