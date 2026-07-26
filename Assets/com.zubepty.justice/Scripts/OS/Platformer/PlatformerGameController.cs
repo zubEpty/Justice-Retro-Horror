@@ -16,12 +16,17 @@ public sealed class PlatformerGameController : MonoBehaviour
     [SerializeField] private GameObject nextGameWindow;
 
     [SerializeField] private float moveSpeed = 360f;
+    [SerializeField] private float slowMoveSpeed = 90f;
     [SerializeField] private float jumpVelocity = 560f;
     [SerializeField] private float gravity = 1350f;
     [SerializeField] private float collapseSpeed = 980f;
     [SerializeField] private float goalGateSpeed = 720f;
-    [SerializeField] private float goalGateDropDistance = 145f;
-    [SerializeField] private float goalGateGraceTime = 0.18f;
+    [SerializeField] private float goalGateRiseDistance = 145f;
+    [SerializeField] private float goalGateJumpRiseDistance = 245f;
+    [SerializeField] private float goalGateJumpSpeedThreshold = 80f;
+    [SerializeField] private float goalGateSlowTouchSpeedThreshold = 120f;
+    [SerializeField] private float goalGateResetDistance = 120f;
+    [SerializeField] private int slowWalkHintFailedAttempts = 3;
     [SerializeField] private float resetDelay = 0.45f;
     [SerializeField] private float nextGameDelay = 0.45f;
 
@@ -29,16 +34,18 @@ public sealed class PlatformerGameController : MonoBehaviour
     private Vector2 startPosition;
     private Vector2 goalStartPosition;
     private Vector2 collapsingPlatformStartPosition;
+    private Color statusTextStartColor;
     private bool grounded;
     private bool won;
     private bool collapsing;
     private bool goalGateTriggered;
     private bool goalGateReturning;
-    private bool goalGateReady;
     private bool resetting;
     private bool handoffStarted;
+    private bool slowWalkHintUnlocked;
+    private int goalGateFailedAttempts;
     private float resetTimer;
-    private float goalGateGraceTimer;
+    private float goalGateCurrentRiseDistance;
 
     public void Configure(RectTransform playerRect, RectTransform goalRect, TextMeshProUGUI statusLabel, RectTransform trapPlatform, GameObject currentWindow, GameObject nextWindow, params RectTransform[] platformRects)
     {
@@ -52,6 +59,12 @@ public sealed class PlatformerGameController : MonoBehaviour
         startPosition = player.anchoredPosition;
         goalStartPosition = goal.anchoredPosition;
         collapsingPlatformStartPosition = collapsingPlatform.anchoredPosition;
+        goalGateCurrentRiseDistance = goalGateRiseDistance;
+
+        if (statusText != null)
+        {
+            statusTextStartColor = statusText.color;
+        }
     }
 
     private void Update()
@@ -78,8 +91,9 @@ public sealed class PlatformerGameController : MonoBehaviour
         Vector2 previousPosition = player.anchoredPosition;
         Vector2 position = previousPosition;
         float horizontalInput = ReadHorizontalInput();
+        float currentMoveSpeed = ReadSlowInput() ? slowMoveSpeed : moveSpeed;
 
-        velocity.x = horizontalInput * moveSpeed;
+        velocity.x = horizontalInput * currentMoveSpeed;
 
         if (grounded && ReadJumpInput())
         {
@@ -146,6 +160,17 @@ public sealed class PlatformerGameController : MonoBehaviour
             && (keyboard.spaceKey.wasPressedThisFrame || keyboard.wKey.wasPressedThisFrame || keyboard.upArrowKey.wasPressedThisFrame);
 #else
         return Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
+#endif
+    }
+
+    private bool ReadSlowInput()
+    {
+#if ENABLE_INPUT_SYSTEM
+        Keyboard keyboard = Keyboard.current;
+        return keyboard != null
+            && (keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed);
+#else
+        return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 #endif
     }
 
@@ -225,31 +250,34 @@ public sealed class PlatformerGameController : MonoBehaviour
 
     private void UpdateGoalGate(float deltaTime)
     {
-        if (!goalGateTriggered || goalGateReady)
+        if (!goalGateTriggered)
         {
             return;
         }
 
-        if (goalGateGraceTimer > 0f)
+        float raisedY = goalStartPosition.y + goalGateCurrentRiseDistance;
+        bool playerFarFromHouse = Vector2.Distance(player.anchoredPosition, goalStartPosition) >= goalGateResetDistance;
+
+        if (goalGateReturning && !playerFarFromHouse)
         {
-            goalGateGraceTimer -= deltaTime;
+            goalGateReturning = false;
         }
 
-        float closedY = goalStartPosition.y - goalGateDropDistance;
         Vector2 targetPosition = goalGateReturning
             ? goalStartPosition
-            : new Vector2(goalStartPosition.x, closedY);
+            : new Vector2(goalStartPosition.x, raisedY);
 
         goal.anchoredPosition = Vector2.MoveTowards(goal.anchoredPosition, targetPosition, goalGateSpeed * deltaTime);
 
-        if (!goalGateReturning && Mathf.Approximately(goal.anchoredPosition.y, closedY))
+        if (!goalGateReturning && Mathf.Approximately(goal.anchoredPosition.y, raisedY) && playerFarFromHouse)
         {
             goalGateReturning = true;
         }
 
         if (goalGateReturning && Mathf.Approximately(goal.anchoredPosition.y, goalStartPosition.y))
         {
-            goalGateReady = true;
+            goalGateTriggered = false;
+            goalGateReturning = false;
         }
     }
 
@@ -263,6 +291,12 @@ public sealed class PlatformerGameController : MonoBehaviour
             return;
         }
 
+        if (goalGateTriggered)
+        {
+            goalGateFailedAttempts++;
+            slowWalkHintUnlocked = goalGateFailedAttempts >= slowWalkHintFailedAttempts;
+        }
+
         resetting = true;
         resetTimer = resetDelay;
         velocity = Vector2.zero;
@@ -274,14 +308,14 @@ public sealed class PlatformerGameController : MonoBehaviour
         collapsing = false;
         goalGateTriggered = false;
         goalGateReturning = false;
-        goalGateReady = false;
+        goalGateCurrentRiseDistance = goalGateRiseDistance;
         grounded = false;
         won = false;
-        goalGateGraceTimer = 0f;
         velocity = Vector2.zero;
         player.anchoredPosition = startPosition;
         goal.anchoredPosition = goalStartPosition;
         collapsingPlatform.anchoredPosition = collapsingPlatformStartPosition;
+        UpdateSlowWalkHint();
     }
 
     private void UpdateGoalState()
@@ -298,20 +332,23 @@ public sealed class PlatformerGameController : MonoBehaviour
             return;
         }
 
-        if (!goalGateTriggered)
+        bool tryingJumpCatch = !grounded && Mathf.Abs(velocity.y) >= goalGateJumpSpeedThreshold;
+        bool touchingTooFast = velocity.magnitude >= goalGateSlowTouchSpeedThreshold;
+
+        if (tryingJumpCatch)
         {
-            goalGateTriggered = true;
-            goalGateGraceTimer = goalGateGraceTime;
+            TriggerGoalGate(goalGateJumpRiseDistance);
             return;
         }
 
-        if (!goalGateReady)
+        if (touchingTooFast)
         {
-            if (goalGateGraceTimer <= 0f)
-            {
-                BeginReset();
-            }
+            TriggerGoalGate(goalGateRiseDistance);
+            return;
+        }
 
+        if (goalGateTriggered)
+        {
             return;
         }
 
@@ -325,6 +362,25 @@ public sealed class PlatformerGameController : MonoBehaviour
         }
 
         StartNextGameHandoff();
+    }
+
+    private void UpdateSlowWalkHint()
+    {
+        if (!slowWalkHintUnlocked || statusText == null)
+        {
+            return;
+        }
+
+        statusText.richText = true;
+        statusText.color = statusTextStartColor;
+        statusText.text = "oops forgot to add another instruction, here u go\n<color=#ff2020>HOLD SHIFT</color>\n<color=#37ff37>SLOW WALK</color>";
+    }
+
+    private void TriggerGoalGate(float riseDistance)
+    {
+        goalGateTriggered = true;
+        goalGateReturning = false;
+        goalGateCurrentRiseDistance = Mathf.Max(goalGateCurrentRiseDistance, riseDistance);
     }
 
     private void StartNextGameHandoff()
@@ -355,18 +411,6 @@ public sealed class PlatformerGameController : MonoBehaviour
         {
             gameWindow.SetActive(false);
         }
-    }
-
-    private void BeginReset()
-    {
-        if (resetting)
-        {
-            return;
-        }
-
-        resetting = true;
-        resetTimer = resetDelay;
-        velocity = Vector2.zero;
     }
 
     private static Rect GetRect(RectTransform rectTransform, Vector2 anchoredPosition)

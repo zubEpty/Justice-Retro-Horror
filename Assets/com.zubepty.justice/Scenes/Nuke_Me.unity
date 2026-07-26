@@ -2285,6 +2285,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 3
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 0}
+  virusCommandErrorClip: {fileID: 0}
+  virusBlueScreenClip: {fileID: 0}
 --- !u!114 &89432925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4493,6 +4496,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 3
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 0}
+  virusCommandErrorClip: {fileID: 0}
+  virusBlueScreenClip: {fileID: 0}
 --- !u!114 &208007876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6764,6 +6770,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 300
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 0}
+  virusCommandErrorClip: {fileID: 0}
+  virusBlueScreenClip: {fileID: 0}
 --- !u!114 &325820682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11525,6 +11534,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 300
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 0}
+  virusCommandErrorClip: {fileID: 0}
+  virusBlueScreenClip: {fileID: 0}
 --- !u!114 &570608606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15365,6 +15377,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 3
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 0}
+  virusCommandErrorClip: {fileID: 0}
+  virusBlueScreenClip: {fileID: 0}
 --- !u!1 &820642663
 GameObject:
   m_ObjectHideFlags: 0
@@ -16543,6 +16558,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 300
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 0}
+  virusCommandErrorClip: {fileID: 0}
+  virusBlueScreenClip: {fileID: 0}
 --- !u!114 &849212134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18180,6 +18198,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 300
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 0}
+  virusCommandErrorClip: {fileID: 0}
+  virusBlueScreenClip: {fileID: 0}
 --- !u!114 &912574080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18912,6 +18933,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 300
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 0}
+  virusCommandErrorClip: {fileID: 0}
+  virusBlueScreenClip: {fileID: 0}
 --- !u!1 &947890677
 GameObject:
   m_ObjectHideFlags: 0
@@ -22164,6 +22188,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 300
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 0}
+  virusCommandErrorClip: {fileID: 0}
+  virusBlueScreenClip: {fileID: 0}
 --- !u!1 &1139119397
 GameObject:
   m_ObjectHideFlags: 0
@@ -25175,6 +25202,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 3
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 0}
+  virusCommandErrorClip: {fileID: 0}
+  virusBlueScreenClip: {fileID: 0}
 --- !u!114 &1234477078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25583,6 +25613,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 300
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 0}
+  virusCommandErrorClip: {fileID: 0}
+  virusBlueScreenClip: {fileID: 0}
 --- !u!114 &1265018715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28227,6 +28260,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 300
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 0}
+  virusCommandErrorClip: {fileID: 0}
+  virusBlueScreenClip: {fileID: 0}
 --- !u!1 &1386779269
 GameObject:
   m_ObjectHideFlags: 0
@@ -35748,6 +35784,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 3
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 0}
+  virusCommandErrorClip: {fileID: 0}
+  virusBlueScreenClip: {fileID: 0}
 --- !u!114 &1704728658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43838,6 +43877,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 300
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 0}
+  virusCommandErrorClip: {fileID: 0}
+  virusBlueScreenClip: {fileID: 0}
 --- !u!224 &2022057118 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7815548543115562862, guid: 71155f89d87ccbc45b141dace2febe41, type: 3}
