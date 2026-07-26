@@ -16,8 +16,12 @@ public class VirusGlitchSequenceRunner : MonoBehaviour
 
     private RectTransform screenRoot;
     private Vector3 originalRootPosition;
+    private AudioClip scratchClip;
+    private AudioClip commandErrorClip;
+    private AudioClip blueScreenClip;
+    private AudioSource audioSource;
 
-    public static void PlayOnce(GameObject openedWindow)
+    public static void PlayOnce(GameObject openedWindow, AudioClip scratchClip, AudioClip commandErrorClip, AudioClip blueScreenClip)
     {
         if (hasPlayed || openedWindow == null || SceneManager.GetActiveScene().name != SceneName)
             return;
@@ -35,6 +39,9 @@ public class VirusGlitchSequenceRunner : MonoBehaviour
         runnerObject.transform.SetParent(canvas.transform, false);
 
         VirusGlitchSequenceRunner runner = runnerObject.AddComponent<VirusGlitchSequenceRunner>();
+        runner.scratchClip = scratchClip;
+        runner.commandErrorClip = commandErrorClip;
+        runner.blueScreenClip = blueScreenClip;
         runner.Begin(canvas.GetComponent<RectTransform>());
     }
 
@@ -44,12 +51,18 @@ public class VirusGlitchSequenceRunner : MonoBehaviour
         if (screenRoot != null)
             originalRootPosition = screenRoot.localPosition;
 
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
+        audioSource.spatialBlend = 0f;
+
         StartCoroutine(PlaySequence());
     }
 
     private IEnumerator PlaySequence()
     {
         CanvasGroup overlayGroup = CreateGlitchOverlay();
+        PlayOneShot(scratchClip);
 
         yield return StartCoroutine(ShakeScreen(0.35f, 18f));
         yield return StartCoroutine(FlickerOverlay(overlayGroup, 0.7f, 0.08f, 0.34f));
@@ -89,6 +102,7 @@ public class VirusGlitchSequenceRunner : MonoBehaviour
 
         for (int i = 0; i < commandSets.Length; i++)
         {
+            PlayOneShot(commandErrorClip);
             RectTransform commandWindow = CreateCommandWindow(i);
             yield return StartCoroutine(TypeLines(commandWindow, commandSets[i]));
 
@@ -273,6 +287,9 @@ public class VirusGlitchSequenceRunner : MonoBehaviour
 
     private IEnumerator ShowBlueScreenFlash()
     {
+        PlayLoop(blueScreenClip);
+        yield return new WaitForSeconds(0.22f);
+
         GameObject blueScreen = new GameObject("Virus_BlueScreen_Flash", typeof(RectTransform), typeof(CanvasRenderer));
         blueScreen.transform.SetParent(transform.parent, false);
         blueScreen.transform.SetAsLastSibling();
@@ -297,6 +314,7 @@ public class VirusGlitchSequenceRunner : MonoBehaviour
         yield return new WaitForSeconds(1.35f);
         yield return StartCoroutine(FadeCanvasGroup(group, 1f, 0f, 0.18f));
 
+        StopLoop();
         spawnedObjects.Remove(blueScreen);
         Destroy(blueScreen);
     }
@@ -318,6 +336,34 @@ public class VirusGlitchSequenceRunner : MonoBehaviour
         }
 
         group.alpha = endAlpha;
+    }
+
+    private void PlayOneShot(AudioClip clip)
+    {
+        if (clip == null || audioSource == null)
+            return;
+
+        audioSource.PlayOneShot(clip);
+    }
+
+    private void PlayLoop(AudioClip clip)
+    {
+        if (clip == null || audioSource == null)
+            return;
+
+        audioSource.clip = clip;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    private void StopLoop()
+    {
+        if (audioSource == null)
+            return;
+
+        audioSource.loop = false;
+        audioSource.Stop();
+        audioSource.clip = null;
     }
 
     private void Cleanup()

@@ -1392,6 +1392,9 @@ MonoBehaviour:
   ransomwareTimerDurationSeconds: 300
   ransomwareTimerSlideDistance: 520
   ransomwareTimerSlideDuration: 0.45
+  virusScratchClip: {fileID: 8300000, guid: 8859dcdc4069ace40b529224152ca478, type: 3}
+  virusCommandErrorClip: {fileID: 8300000, guid: d8b645bc09d17fa4aa547905e4bf76b4, type: 3}
+  virusBlueScreenClip: {fileID: 8300000, guid: e8758eaa42f24ab4ea5df39608636835, type: 3}
 --- !u!114 &32401513
 MonoBehaviour:
   m_ObjectHideFlags: 0

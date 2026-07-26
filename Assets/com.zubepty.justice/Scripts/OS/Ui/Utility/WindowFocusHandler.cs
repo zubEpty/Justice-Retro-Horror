@@ -14,6 +14,11 @@ public class WindowFocusHandler : MonoBehaviour, IPointerDownHandler
     [SerializeField] private float ransomwareTimerSlideDistance = 520f;
     [SerializeField] private float ransomwareTimerSlideDuration = 0.45f;
 
+    [Header("Virus Glitch Audio")]
+    [SerializeField] private AudioClip virusScratchClip;
+    [SerializeField] private AudioClip virusCommandErrorClip;
+    [SerializeField] private AudioClip virusBlueScreenClip;
+
     private bool hasRansomwareTimerHiddenPosition;
     private Vector2 ransomwareTimerHiddenPosition;
     private static RansomwareTimerRunner ransomwareTimerRunner;
@@ -38,7 +43,7 @@ public class WindowFocusHandler : MonoBehaviour, IPointerDownHandler
         if (window.name == "Ransomware_Window")
         {
             StartRansomwareTimer();
-            VirusGlitchSequenceRunner.PlayOnce(window);
+            VirusGlitchSequenceRunner.PlayOnce(window, virusScratchClip, virusCommandErrorClip, virusBlueScreenClip);
         }
     }
 
