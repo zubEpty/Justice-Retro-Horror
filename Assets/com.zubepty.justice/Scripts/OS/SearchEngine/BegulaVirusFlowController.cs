@@ -33,10 +33,16 @@ public class BegulaVirusFlowController : MonoBehaviour
     [SerializeField] private GameObject emailWindow;
     [SerializeField] private WindowFocusHandler emailFocusHandler;
     [SerializeField] private Button lindaEmailButton;
+    [SerializeField] private Image lindaEmailUnreadDot;
+    [SerializeField] private Button eptyEmailButton;
     [SerializeField] private GameObject emailContentPanel;
+    [SerializeField] private GameObject passwordEmailContentPanel;
     [SerializeField] private Button emailDownloadButton;
     [SerializeField] private AntivirusDownloadController antivirusDownloadController;
     [SerializeField] private GameObject emailDownloadTarget;
+    [SerializeField] private Color lindaEmailUnreadDotColor = new Color(0.22f, 1f, 0.25f, 1f);
+    [SerializeField] private Color lindaEmailReadTint = new Color(0.58f, 0.58f, 0.58f, 1f);
+    [SerializeField] private Color lindaEmailReadTextColor = new Color(0.42f, 0.42f, 0.42f, 1f);
     [SerializeField] private float emailAlertSlideDistance = 520f;
     [SerializeField] private float emailAlertSlideDuration = 0.45f;
 
@@ -73,7 +79,14 @@ public class BegulaVirusFlowController : MonoBehaviour
     private bool _startGameListenerHooked;
     private bool _belugaEndingStarted;
     private bool _originalAppearanceCaptured;
+    private bool _lindaEmailUnread;
+    private bool _passwordHintEmailAvailable;
+    private bool _passwordHintEmailUnread;
+    private bool _lindaEmailAppearanceCaptured;
     private string _submitProjectInitialText;
+    private Color _lindaEmailInitialButtonColor;
+    private TextMeshProUGUI[] _lindaEmailTexts;
+    private Color[] _lindaEmailInitialTextColors;
     private ImageState _desktopBackgroundInitialState;
     private ImageState[] _appIconInitialStates;
     private Tween _submissionUploadTween;
@@ -139,6 +152,18 @@ public class BegulaVirusFlowController : MonoBehaviour
     {
         ResolveSubmissionReferences();
         OpenEmailWindow();
+    }
+
+    public void NotifyPasswordProtectedDocumentsClicked()
+    {
+        ResolveSubmissionReferences();
+
+        if (_passwordHintEmailAvailable)
+            return;
+
+        _passwordHintEmailAvailable = true;
+        _passwordHintEmailUnread = true;
+        ShowEmailAlert();
     }
 
     public void StartBelugaEnding()
@@ -222,6 +247,11 @@ public class BegulaVirusFlowController : MonoBehaviour
         if (lindaEmailButton != null)
             lindaEmailButton.onClick.AddListener(OpenLindaEmail);
 
+        if (eptyEmailButton != null)
+            eptyEmailButton.onClick.RemoveListener(OpenEptyPasswordEmail);
+        if (eptyEmailButton != null)
+            eptyEmailButton.onClick.AddListener(OpenEptyPasswordEmail);
+
         if (emailDownloadButton != null)
             emailDownloadButton.onClick.RemoveListener(StartEmailDownload);
         if (emailDownloadButton != null)
@@ -243,6 +273,9 @@ public class BegulaVirusFlowController : MonoBehaviour
 
         if (lindaEmailButton != null)
             lindaEmailButton.onClick.RemoveListener(OpenLindaEmail);
+
+        if (eptyEmailButton != null)
+            eptyEmailButton.onClick.RemoveListener(OpenEptyPasswordEmail);
 
         if (emailDownloadButton != null)
             emailDownloadButton.onClick.RemoveListener(StartEmailDownload);
@@ -394,6 +427,7 @@ public class BegulaVirusFlowController : MonoBehaviour
         if (submitProjectButton != null)
             submitProjectButton.interactable = false;
 
+        MarkLindaEmailUnread();
         ShowEmailAlert();
     }
 
@@ -421,11 +455,12 @@ public class BegulaVirusFlowController : MonoBehaviour
         OpenWindow(emailWindow, emailFocusHandler);
         RaiseTransformChain(emailWindow);
         EnableLindaEmailButton();
+        EnableEptyEmailButton();
     }
 
     private void EnableLindaEmailButton()
     {
-        if (lindaEmailButton == null)
+        if (!_projectSubmitted || lindaEmailButton == null)
             return;
 
         SetParentsActive(lindaEmailButton.transform);
@@ -434,6 +469,22 @@ public class BegulaVirusFlowController : MonoBehaviour
         lindaEmailButton.transform.DOKill();
         lindaEmailButton.transform.localScale = Vector3.one * 0.88f;
         lindaEmailButton.transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack);
+        ApplyLindaEmailReadState();
+        RaiseTransformChain(emailWindow);
+    }
+
+    private void EnableEptyEmailButton()
+    {
+        if (!_passwordHintEmailAvailable || eptyEmailButton == null)
+            return;
+
+        SetParentsActive(eptyEmailButton.transform);
+        eptyEmailButton.gameObject.SetActive(true);
+        eptyEmailButton.interactable = true;
+        eptyEmailButton.transform.SetAsLastSibling();
+        eptyEmailButton.transform.DOKill();
+        eptyEmailButton.transform.localScale = Vector3.one * 0.88f;
+        eptyEmailButton.transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack);
         RaiseTransformChain(emailWindow);
     }
 
@@ -444,9 +495,23 @@ public class BegulaVirusFlowController : MonoBehaviour
 
         emailContentPanel.SetActive(true);
         emailContentPanel.transform.SetAsLastSibling();
+        MarkLindaEmailRead();
 
         if (emailDownloadButton != null)
             emailDownloadButton.interactable = true;
+    }
+
+    private void OpenEptyPasswordEmail()
+    {
+        if (passwordEmailContentPanel == null)
+            return;
+
+        if (emailContentPanel != null)
+            emailContentPanel.SetActive(false);
+
+        passwordEmailContentPanel.SetActive(true);
+        passwordEmailContentPanel.transform.SetAsLastSibling();
+        _passwordHintEmailUnread = false;
     }
 
     private void StartEmailDownload()
@@ -474,8 +539,19 @@ public class BegulaVirusFlowController : MonoBehaviour
         if (emailContentPanel != null)
             emailContentPanel.SetActive(false);
 
+        if (passwordEmailContentPanel != null)
+            passwordEmailContentPanel.SetActive(false);
+
         if (lindaEmailButton != null)
             lindaEmailButton.gameObject.SetActive(false);
+
+        if (eptyEmailButton != null)
+            eptyEmailButton.gameObject.SetActive(false);
+
+        _lindaEmailUnread = false;
+        _passwordHintEmailAvailable = false;
+        _passwordHintEmailUnread = false;
+        ApplyLindaEmailReadState();
 
         if (submitProjectButton != null)
             submitProjectButton.interactable = true;
@@ -525,8 +601,17 @@ public class BegulaVirusFlowController : MonoBehaviour
         if (lindaEmailButton == null)
             lindaEmailButton = FindSceneComponent<Button>("Btn_Linda");
 
+        if (lindaEmailUnreadDot == null)
+            lindaEmailUnreadDot = FindChildImage(lindaEmailButton == null ? null : lindaEmailButton.gameObject, "Unread_Dot", "Linda_Unread_Dot", "NewMail_Dot");
+
+        if (eptyEmailButton == null)
+            eptyEmailButton = FindSceneComponent<Button>("Btn_Epty");
+
         if (emailContentPanel == null)
             emailContentPanel = FindSceneObject("Email_content");
+
+        if (passwordEmailContentPanel == null)
+            passwordEmailContentPanel = FindSceneObject("Email_content_pass");
 
         if (emailDownloadButton == null)
             emailDownloadButton = FindChildButton(emailContentPanel, "Btn_Virus_Download");
@@ -547,6 +632,104 @@ public class BegulaVirusFlowController : MonoBehaviour
         }
 
         _submissionReferencesResolved = true;
+    }
+
+    private void MarkLindaEmailUnread()
+    {
+        _lindaEmailUnread = true;
+        ApplyLindaEmailReadState();
+    }
+
+    private void MarkLindaEmailRead()
+    {
+        _lindaEmailUnread = false;
+        ApplyLindaEmailReadState();
+    }
+
+    private void ApplyLindaEmailReadState()
+    {
+        if (lindaEmailButton == null)
+            return;
+
+        SanitizeLindaEmailColors();
+        CaptureLindaEmailAppearance();
+        EnsureLindaEmailUnreadDot();
+
+        if (lindaEmailUnreadDot != null)
+        {
+            lindaEmailUnreadDot.color = lindaEmailUnreadDotColor;
+            lindaEmailUnreadDot.gameObject.SetActive(_lindaEmailUnread && lindaEmailButton.gameObject.activeInHierarchy);
+        }
+
+        Image buttonImage = lindaEmailButton.targetGraphic as Image;
+        if (buttonImage == null)
+            buttonImage = lindaEmailButton.GetComponent<Image>();
+
+        if (buttonImage != null)
+            buttonImage.color = _lindaEmailUnread ? _lindaEmailInitialButtonColor : lindaEmailReadTint;
+
+        if (_lindaEmailTexts == null || _lindaEmailInitialTextColors == null)
+            return;
+
+        for (int i = 0; i < _lindaEmailTexts.Length; i++)
+        {
+            if (_lindaEmailTexts[i] == null)
+                continue;
+
+            Color initialColor = i < _lindaEmailInitialTextColors.Length ? _lindaEmailInitialTextColors[i] : Color.black;
+            _lindaEmailTexts[i].color = _lindaEmailUnread ? initialColor : lindaEmailReadTextColor;
+        }
+    }
+
+    private void CaptureLindaEmailAppearance()
+    {
+        if (_lindaEmailAppearanceCaptured || lindaEmailButton == null)
+            return;
+
+        Image buttonImage = lindaEmailButton.targetGraphic as Image;
+        if (buttonImage == null)
+            buttonImage = lindaEmailButton.GetComponent<Image>();
+
+        _lindaEmailInitialButtonColor = buttonImage == null ? Color.white : buttonImage.color;
+        _lindaEmailTexts = lindaEmailButton.GetComponentsInChildren<TextMeshProUGUI>(true);
+        _lindaEmailInitialTextColors = new Color[_lindaEmailTexts.Length];
+        for (int i = 0; i < _lindaEmailTexts.Length; i++)
+            _lindaEmailInitialTextColors[i] = _lindaEmailTexts[i] == null ? Color.black : _lindaEmailTexts[i].color;
+
+        _lindaEmailAppearanceCaptured = true;
+    }
+
+    private void EnsureLindaEmailUnreadDot()
+    {
+        if (lindaEmailUnreadDot != null || lindaEmailButton == null)
+            return;
+
+        GameObject dotObject = new GameObject("Unread_Dot", typeof(RectTransform), typeof(CanvasRenderer));
+        dotObject.transform.SetParent(lindaEmailButton.transform, false);
+        dotObject.transform.SetAsLastSibling();
+
+        RectTransform dotRect = dotObject.GetComponent<RectTransform>();
+        dotRect.anchorMin = new Vector2(1f, 0.5f);
+        dotRect.anchorMax = new Vector2(1f, 0.5f);
+        dotRect.pivot = new Vector2(0.5f, 0.5f);
+        dotRect.anchoredPosition = new Vector2(-12f, 0f);
+        dotRect.sizeDelta = new Vector2(10f, 10f);
+
+        lindaEmailUnreadDot = dotObject.AddComponent<Image>();
+        lindaEmailUnreadDot.raycastTarget = false;
+        lindaEmailUnreadDot.color = lindaEmailUnreadDotColor;
+    }
+
+    private void SanitizeLindaEmailColors()
+    {
+        if (lindaEmailUnreadDotColor.a <= 0f)
+            lindaEmailUnreadDotColor = new Color(0.22f, 1f, 0.25f, 1f);
+
+        if (lindaEmailReadTint.a <= 0f)
+            lindaEmailReadTint = new Color(0.58f, 0.58f, 0.58f, 1f);
+
+        if (lindaEmailReadTextColor.a <= 0f)
+            lindaEmailReadTextColor = new Color(0.42f, 0.42f, 0.42f, 1f);
     }
 
     private void ResolveEndingReferences()

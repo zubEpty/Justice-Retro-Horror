@@ -23,7 +23,7 @@ public class WindowFocusHandler : MonoBehaviour, IPointerDownHandler
     private Vector2 ransomwareTimerHiddenPosition;
     private static RansomwareTimerRunner ransomwareTimerRunner;
 
-    private bool IsAlertWindow => isAlert || gameObject.name.StartsWith("Alert Panel");
+    private bool IsAlertWindow => isAlert || gameObject.name.StartsWith("Alert Panel") || gameObject.name.Trim() == "Password_Alert_Panel";
 
     private void OnEnable()
     {
