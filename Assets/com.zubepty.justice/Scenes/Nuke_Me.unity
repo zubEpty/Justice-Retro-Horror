@@ -969,6 +969,7 @@ MonoBehaviour:
   submitButton: {fileID: 1985135917}
   downloadLicenseButton: {fileID: 173286878}
   licenseButton: {fileID: 1179068793}
+  licenseDownloadController: {fileID: 0}
   wrongTriesBeforeHint: 3
   dropDuration: 0.18
   hintMessage: 'Hint: Search Everywhere, anywhere around.'
@@ -33264,6 +33265,7 @@ GameObject:
   - component: {fileID: 1659143368}
   - component: {fileID: 1659143367}
   - component: {fileID: 1659143366}
+  - component: {fileID: 1659143369}
   m_Layer: 5
   m_Name: Button_eliminate
   m_TagString: Untagged
@@ -33334,19 +33336,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1659143367}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1234841831}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1659143367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33385,6 +33375,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659143364}
   m_CullTransparentMesh: 1
+--- !u!114 &1659143369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659143364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7649eb8ba9644649bdf97f41ac2d137, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  successPanel: {fileID: 1234841831}
+  threatCheckerPanel: {fileID: 1870909212}
+  virusButton: {fileID: 927640541}
+  timerObject: {fileID: 1691382860}
+  eliminateDuration: 3.2
+  successRevealDelay: 1.5
 --- !u!1 &1664168504
 GameObject:
   m_ObjectHideFlags: 0
@@ -34231,6 +34239,7 @@ GameObject:
   - component: {fileID: 1694291986}
   - component: {fileID: 1694291985}
   - component: {fileID: 1694291984}
+  - component: {fileID: 1694291987}
   m_Layer: 5
   m_Name: Btn_Scan
   m_TagString: Untagged
@@ -34301,19 +34310,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1694291985}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1870909212}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1694291985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34352,6 +34349,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694291982}
   m_CullTransparentMesh: 1
+--- !u!114 &1694291987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694291982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a1260b7f4e4d43b6dfbc6a00e52c88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threatCheckerPanel: {fileID: 1870909212}
+  lineDelay: 0.28
+  completePause: 0.55
+  useBlueConsole: 1
 --- !u!1 &1697230489
 GameObject:
   m_ObjectHideFlags: 0
