@@ -22,6 +22,9 @@ public class BegulaVirusFlowController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI submitProjectButtonText;
     [SerializeField] private GameObject submissionConfirmationPanel;
     [SerializeField] private Button submissionOkButton;
+    [SerializeField] private GameObject uploadingPanel;
+    [SerializeField] private Image uploadingProgressFill;
+    [SerializeField] private float uploadDuration = 2.4f;
 
     [Header("Email Notification")]
     [SerializeField] private GameObject emailAlertPanel;
@@ -39,8 +42,12 @@ public class BegulaVirusFlowController : MonoBehaviour
     private Vector2 _emailAlertShownPosition;
     private Vector2 _emailAlertHiddenPosition;
     private bool _projectSubmitted;
+    private bool _submissionUploadInProgress;
     private bool _submissionReferencesResolved;
     private bool _submissionListenersHooked;
+    private Tween _submissionUploadTween;
+
+    public bool IsSubmittedEmailAvailable => _projectSubmitted;
 
     private void Awake()
     {
@@ -74,6 +81,7 @@ public class BegulaVirusFlowController : MonoBehaviour
         if (hackersAddressButton != null)
             hackersAddressButton.onClick.RemoveListener(OpenPlatformerGame);
 
+        _submissionUploadTween?.Kill();
         UnhookSubmissionListeners();
     }
 
@@ -81,6 +89,12 @@ public class BegulaVirusFlowController : MonoBehaviour
     {
         ResolveSubmissionReferences();
         ConfirmSubmission();
+    }
+
+    public void StartProjectSubmission()
+    {
+        ResolveSubmissionReferences();
+        ShowSubmissionConfirmation();
     }
 
     public void OpenSubmittedEmail()
@@ -174,6 +188,52 @@ public class BegulaVirusFlowController : MonoBehaviour
         if (_projectSubmitted || submissionConfirmationPanel == null)
             return;
 
+        if (_submissionUploadInProgress)
+            return;
+
+        if (uploadingPanel == null || uploadingProgressFill == null)
+        {
+            ShowSubmissionConfirmationPanel();
+            return;
+        }
+
+        _submissionUploadInProgress = true;
+
+        if (submitProjectButton != null)
+            submitProjectButton.interactable = false;
+
+        submissionConfirmationPanel.SetActive(false);
+
+        uploadingPanel.SetActive(true);
+        uploadingPanel.transform.SetAsLastSibling();
+
+        uploadingProgressFill.DOKill();
+        uploadingProgressFill.fillAmount = 0f;
+        _submissionUploadTween?.Kill();
+        _submissionUploadTween = uploadingProgressFill
+            .DOFillAmount(1f, uploadDuration)
+            .SetEase(Ease.Linear)
+            .OnComplete(CompleteSubmissionUpload);
+    }
+
+    private void CompleteSubmissionUpload()
+    {
+        _submissionUploadInProgress = false;
+
+        if (uploadingPanel != null)
+            uploadingPanel.SetActive(false);
+
+        ShowSubmissionConfirmationPanel();
+    }
+
+    private void ShowSubmissionConfirmationPanel()
+    {
+        if (_projectSubmitted || submissionConfirmationPanel == null)
+            return;
+
+        if (submitProjectButton != null)
+            submitProjectButton.interactable = true;
+
         submissionConfirmationPanel.SetActive(true);
         submissionConfirmationPanel.transform.SetAsLastSibling();
     }
@@ -262,6 +322,12 @@ public class BegulaVirusFlowController : MonoBehaviour
         if (submissionConfirmationPanel != null)
             submissionConfirmationPanel.SetActive(false);
 
+        if (uploadingPanel != null)
+            uploadingPanel.SetActive(false);
+
+        if (uploadingProgressFill != null)
+            uploadingProgressFill.fillAmount = 0f;
+
         if (emailAlertPanel != null)
             emailAlertPanel.SetActive(false);
 
@@ -291,6 +357,12 @@ public class BegulaVirusFlowController : MonoBehaviour
 
         if (submissionOkButton == null)
             submissionOkButton = FindChildButton(submissionConfirmationPanel, "Btn_OK", "Btn_Ok", "Button_OK");
+
+        if (uploadingPanel == null)
+            uploadingPanel = FindSceneObject("Uploading_Panel");
+
+        if (uploadingProgressFill == null)
+            uploadingProgressFill = FindChildImage(uploadingPanel, "Slider", "Fill", "ProgressFill");
 
         if (emailAlertPanel == null)
             emailAlertPanel = FindSceneObject("Email_alert");
@@ -395,6 +467,24 @@ public class BegulaVirusFlowController : MonoBehaviour
             return null;
 
         return parent.GetComponentInChildren<Button>(true);
+    }
+
+    private static Image FindChildImage(GameObject parent, params string[] names)
+    {
+        if (parent == null)
+            return null;
+
+        Image[] images = parent.GetComponentsInChildren<Image>(true);
+        foreach (string name in names)
+        {
+            foreach (Image image in images)
+            {
+                if (image.name == name)
+                    return image;
+            }
+        }
+
+        return images.Length > 0 ? images[0] : null;
     }
 
     private static T FindSceneComponent<T>(string objectName) where T : Component

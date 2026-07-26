@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SubmittedEmailWindowReveal : MonoBehaviour
 {
     [SerializeField] private Button lindaButton;
+    [SerializeField] private BegulaVirusFlowController flowController;
 
     private Coroutine revealRoutine;
 
@@ -25,6 +26,18 @@ public class SubmittedEmailWindowReveal : MonoBehaviour
 
         if (lindaButton == null)
             lindaButton = FindSceneButton("Btn_Linda");
+
+        if (flowController == null)
+            flowController = FindFlowController();
+
+        if (flowController == null || !flowController.IsSubmittedEmailAvailable)
+        {
+            if (lindaButton != null)
+                lindaButton.gameObject.SetActive(false);
+
+            revealRoutine = null;
+            yield break;
+        }
 
         if (lindaButton != null)
         {
@@ -46,6 +59,18 @@ public class SubmittedEmailWindowReveal : MonoBehaviour
         {
             if (sceneObject.name == objectName && sceneObject.scene.IsValid())
                 return sceneObject.GetComponent<Button>();
+        }
+
+        return null;
+    }
+
+    private static BegulaVirusFlowController FindFlowController()
+    {
+        BegulaVirusFlowController[] controllers = Resources.FindObjectsOfTypeAll<BegulaVirusFlowController>();
+        foreach (BegulaVirusFlowController controller in controllers)
+        {
+            if (controller.gameObject.scene.IsValid())
+                return controller;
         }
 
         return null;
