@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class VirusDownloadButton : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private AntivirusDownloadController downloadController;
+    [SerializeField] private GameObject downloadTarget;
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -16,8 +17,11 @@ public class VirusDownloadButton : MonoBehaviour, IPointerClickHandler
         if (downloadController == null)
             downloadController = FindSceneComponent<AntivirusDownloadController>();
 
+        if (downloadTarget == null)
+            downloadTarget = FindSceneObject("Btn_Virus");
+
         if (downloadController != null)
-            downloadController.StartDownload();
+            downloadController.StartDownload(downloadTarget);
     }
 
     private static T FindSceneComponent<T>() where T : Component
@@ -27,6 +31,18 @@ public class VirusDownloadButton : MonoBehaviour, IPointerClickHandler
         {
             if (component.gameObject.scene.IsValid())
                 return component;
+        }
+
+        return null;
+    }
+
+    private static GameObject FindSceneObject(string objectName)
+    {
+        GameObject[] sceneObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (GameObject sceneObject in sceneObjects)
+        {
+            if (sceneObject.name == objectName && sceneObject.scene.IsValid())
+                return sceneObject;
         }
 
         return null;

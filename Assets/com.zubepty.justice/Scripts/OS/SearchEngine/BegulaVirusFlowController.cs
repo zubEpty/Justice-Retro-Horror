@@ -36,6 +36,7 @@ public class BegulaVirusFlowController : MonoBehaviour
     [SerializeField] private GameObject emailContentPanel;
     [SerializeField] private Button emailDownloadButton;
     [SerializeField] private AntivirusDownloadController antivirusDownloadController;
+    [SerializeField] private GameObject emailDownloadTarget;
     [SerializeField] private float emailAlertSlideDistance = 520f;
     [SerializeField] private float emailAlertSlideDuration = 0.45f;
 
@@ -314,7 +315,7 @@ public class BegulaVirusFlowController : MonoBehaviour
         if (antivirusDownloadController == null)
             return;
 
-        antivirusDownloadController.StartDownload();
+        antivirusDownloadController.StartDownload(emailDownloadTarget);
     }
 
     private void InitializeSubmissionState()
@@ -393,6 +394,9 @@ public class BegulaVirusFlowController : MonoBehaviour
 
         if (antivirusDownloadController == null)
             antivirusDownloadController = FindSceneComponent<AntivirusDownloadController>();
+
+        if (emailDownloadTarget == null)
+            emailDownloadTarget = FindSceneObject("Btn_Virus");
 
         if (emailAlertRect != null)
         {

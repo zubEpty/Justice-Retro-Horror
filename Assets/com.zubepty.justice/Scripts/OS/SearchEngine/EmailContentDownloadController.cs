@@ -5,6 +5,7 @@ public class EmailContentDownloadController : MonoBehaviour
 {
     [SerializeField] private Button downloadButton;
     [SerializeField] private AntivirusDownloadController downloadController;
+    [SerializeField] private GameObject downloadTarget;
 
     private void OnEnable()
     {
@@ -27,7 +28,7 @@ public class EmailContentDownloadController : MonoBehaviour
     private void StartDownload()
     {
         if (downloadController != null)
-            downloadController.StartDownload();
+            downloadController.StartDownload(downloadTarget);
     }
 
     private void ResolveReferences()
@@ -40,6 +41,9 @@ public class EmailContentDownloadController : MonoBehaviour
 
         if (downloadController == null)
             downloadController = FindSceneComponent<AntivirusDownloadController>();
+
+        if (downloadTarget == null)
+            downloadTarget = FindSceneObject("Btn_Virus");
     }
 
     private Button FindChildButton(string objectName)
@@ -61,6 +65,18 @@ public class EmailContentDownloadController : MonoBehaviour
         {
             if (component.gameObject.scene.IsValid())
                 return component;
+        }
+
+        return null;
+    }
+
+    private static GameObject FindSceneObject(string objectName)
+    {
+        GameObject[] sceneObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (GameObject sceneObject in sceneObjects)
+        {
+            if (sceneObject.name == objectName && sceneObject.scene.IsValid())
+                return sceneObject;
         }
 
         return null;

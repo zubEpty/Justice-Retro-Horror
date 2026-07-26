@@ -18208,7 +18208,7 @@ MonoBehaviour:
   progressFill: {fileID: 1441902037}
   okButton: {fileID: 1447932048}
   okButtonText: {fileID: 1969127863}
-  antivirusButton: {fileID: 927640541}
+  antivirusButton: {fileID: 824740379}
   downloadDuration: 6
   waitingText: Please wait...
   doneText: OK
