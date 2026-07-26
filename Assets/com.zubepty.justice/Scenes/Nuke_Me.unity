@@ -6358,6 +6358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downloadButton: {fileID: 1964704311}
   downloadController: {fileID: 912574081}
+  downloadTarget: {fileID: 0}
 --- !u!1 &320322232
 GameObject:
   m_ObjectHideFlags: 0
@@ -30130,10 +30131,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Your internet has restored but
-
-    all your files will be gone, and your
-    private photos will be sold online.'
+  m_text: Your files will be gone, and your private photos will be sold online.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a764339179d392049bc4c9145a7ea162, type: 2}
   m_sharedMaterial: {fileID: -6091013736255803491, guid: a764339179d392049bc4c9145a7ea162, type: 2}
@@ -41692,6 +41690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   downloadController: {fileID: 912574081}
+  downloadTarget: {fileID: 0}
 --- !u!1 &1967123462
 GameObject:
   m_ObjectHideFlags: 0
@@ -44766,6 +44765,7 @@ MonoBehaviour:
   emailContentPanel: {fileID: 0}
   emailDownloadButton: {fileID: 0}
   antivirusDownloadController: {fileID: 0}
+  emailDownloadTarget: {fileID: 0}
   emailAlertSlideDistance: 520
   emailAlertSlideDuration: 0.45
 --- !u!1 &2069644066
