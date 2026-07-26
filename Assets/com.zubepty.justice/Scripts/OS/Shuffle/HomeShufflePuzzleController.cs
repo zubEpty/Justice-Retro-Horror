@@ -131,6 +131,7 @@ public class HomeShufflePuzzleController : MonoBehaviour
         }
 
         consecutiveWrongSubmits++;
+        RetroAudioManager.PlayWrongShuffle();
         ShakePuzzle();
 
         if (consecutiveWrongSubmits >= wrongTriesBeforeHint)

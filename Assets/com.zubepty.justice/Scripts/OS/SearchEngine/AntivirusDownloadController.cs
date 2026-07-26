@@ -119,6 +119,7 @@ public class AntivirusDownloadController : MonoBehaviour
             target.SetActive(true);
             target.transform.SetAsLastSibling();
             RaiseParentsToFront(target.transform);
+            RetroAudioManager.PlayDownloadEnabled();
         }
 
         SetOkButtonState(true, doneText);

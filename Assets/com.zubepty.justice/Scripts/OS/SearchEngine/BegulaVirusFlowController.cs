@@ -336,6 +336,7 @@ public class BegulaVirusFlowController : MonoBehaviour
         if (licenseValidatorPanel == null)
             return;
 
+        RetroAudioManager.PlayAlert();
         licenseValidatorPanel.SetActive(true);
         licenseValidatorPanel.transform.SetAsLastSibling();
     }
@@ -436,6 +437,7 @@ public class BegulaVirusFlowController : MonoBehaviour
         if (emailAlertPanel == null)
             return;
 
+        RetroAudioManager.PlayNotification();
         emailAlertPanel.SetActive(true);
         emailAlertPanel.transform.SetAsLastSibling();
 
@@ -882,6 +884,7 @@ public class BegulaVirusFlowController : MonoBehaviour
             return;
         }
 
+        RetroAudioManager.PlayAlert();
         GameObject panel = new GameObject("Beluga_Owned_Warning", typeof(RectTransform), typeof(CanvasRenderer));
         panel.transform.SetParent(parent, false);
         panel.transform.SetAsLastSibling();
@@ -906,6 +909,7 @@ public class BegulaVirusFlowController : MonoBehaviour
         {
             mainMenu.SetActive(true);
             mainMenu.transform.SetAsLastSibling();
+            RetroAudioManager.RefreshSceneAudio();
         }
 
         if (toolbar != null)

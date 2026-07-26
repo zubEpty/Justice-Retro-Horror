@@ -99,6 +99,7 @@ public sealed class PlatformerGameController : MonoBehaviour
         {
             velocity.y = jumpVelocity;
             grounded = false;
+            RetroAudioManager.PlayJump();
         }
 
         velocity.y -= gravity * deltaTime;
@@ -300,6 +301,7 @@ public sealed class PlatformerGameController : MonoBehaviour
         resetting = true;
         resetTimer = resetDelay;
         velocity = Vector2.zero;
+        RetroAudioManager.PlayPlayerFailed();
     }
 
     private void ResetPlayer()
@@ -381,6 +383,7 @@ public sealed class PlatformerGameController : MonoBehaviour
         goalGateTriggered = true;
         goalGateReturning = false;
         goalGateCurrentRiseDistance = Mathf.Max(goalGateCurrentRiseDistance, riseDistance);
+        RetroAudioManager.PlayDoorMove();
     }
 
     private void StartNextGameHandoff()
