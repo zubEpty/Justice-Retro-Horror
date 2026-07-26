@@ -48,10 +48,19 @@ public class BegulaVirusFlowController : MonoBehaviour
     [SerializeField] private Sprite belugaSprite;
     [SerializeField] private GameObject toolbar;
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private Button startGameButton;
     [SerializeField] private AudioClip endingScratchClip;
     [SerializeField] private AudioClip endingCommandErrorClip;
     [SerializeField] private AudioClip endingBlueScreenClip;
     [SerializeField] private string endingWarningMessage = "This pc is now owned by Begula, Get out.";
+
+    private struct ImageState
+    {
+        public Image Image;
+        public Sprite Sprite;
+        public Color Color;
+        public bool PreserveAspect;
+    }
 
     private Vector2 _emailAlertShownPosition;
     private Vector2 _emailAlertHiddenPosition;
@@ -61,7 +70,12 @@ public class BegulaVirusFlowController : MonoBehaviour
     private bool _submissionListenersHooked;
     private bool _endingReferencesResolved;
     private bool _endingListenerHooked;
+    private bool _startGameListenerHooked;
     private bool _belugaEndingStarted;
+    private bool _originalAppearanceCaptured;
+    private string _submitProjectInitialText;
+    private ImageState _desktopBackgroundInitialState;
+    private ImageState[] _appIconInitialStates;
     private Tween _submissionUploadTween;
 
     public bool IsSubmittedEmailAvailable => _projectSubmitted;
@@ -82,12 +96,14 @@ public class BegulaVirusFlowController : MonoBehaviour
 
         InitializeSubmissionState();
         HookEndingListener();
+        HookStartGameListener();
     }
 
     private void OnEnable()
     {
         HookSubmissionListeners();
         HookEndingListener();
+        HookStartGameListener();
     }
 
     private void OnDestroy()
@@ -104,6 +120,7 @@ public class BegulaVirusFlowController : MonoBehaviour
         _submissionUploadTween?.Kill();
         UnhookSubmissionListeners();
         UnhookEndingListener();
+        UnhookStartGameListener();
     }
 
     public void ConfirmProjectSubmission()
@@ -141,6 +158,41 @@ public class BegulaVirusFlowController : MonoBehaviour
         bool glitchStarted = VirusGlitchSequenceRunner.PlayAgain(gameObject, endingScratchClip, endingCommandErrorClip, endingBlueScreenClip, ShowBelugaWarning);
         if (!glitchStarted)
             ShowBelugaWarning();
+    }
+
+    public void ResetOwnedPcAndStartGame()
+    {
+        ResolveSubmissionReferences();
+        ResolveEndingReferences();
+        CaptureOriginalAppearance();
+
+        _belugaEndingStarted = false;
+        _projectSubmitted = false;
+        _submissionUploadInProgress = false;
+        _submissionUploadTween?.Kill();
+        VirusGlitchSequenceRunner.ResetPlayOnceState();
+
+        RestoreNormalDesktop();
+        InitializeSubmissionState();
+        CloseOpenDesktopWindows();
+        HideReplayOnlyButtons();
+        ResetSearchEngineToHomePage();
+        SetSceneObjectActive("Beluga_Owned_Warning", false);
+
+        if (gameSuccessOkButton != null)
+            gameSuccessOkButton.interactable = true;
+
+        if (submitProjectButtonText != null)
+            submitProjectButtonText.text = _submitProjectInitialText;
+
+        if (toolbar != null)
+            toolbar.SetActive(true);
+
+        if (mainMenu != null)
+            mainMenu.SetActive(false);
+
+        SetSceneObjectActive("BegulaAntiVIRUS", false);
+        SetSceneObjectActive("BegulaVIRUS", false);
     }
 
     private void HookSubmissionListeners()
@@ -214,12 +266,36 @@ public class BegulaVirusFlowController : MonoBehaviour
         _endingListenerHooked = true;
     }
 
+    private void HookStartGameListener()
+    {
+        ResolveEndingReferences();
+
+        if (_startGameListenerHooked)
+            return;
+
+        if (startGameButton == null)
+            return;
+
+        startGameButton.onClick.RemoveListener(ResetOwnedPcAndStartGame);
+        startGameButton.onClick.AddListener(ResetOwnedPcAndStartGame);
+
+        _startGameListenerHooked = true;
+    }
+
     private void UnhookEndingListener()
     {
         if (gameSuccessOkButton != null)
             gameSuccessOkButton.onClick.RemoveListener(StartBelugaEnding);
 
         _endingListenerHooked = false;
+    }
+
+    private void UnhookStartGameListener()
+    {
+        if (startGameButton != null)
+            startGameButton.onClick.RemoveListener(ResetOwnedPcAndStartGame);
+
+        _startGameListenerHooked = false;
     }
 
     private void ShowLicenseValidator()
@@ -416,6 +492,9 @@ public class BegulaVirusFlowController : MonoBehaviour
         if (submitProjectButtonText == null && submitProjectButton != null)
             submitProjectButtonText = submitProjectButton.GetComponentInChildren<TextMeshProUGUI>(true);
 
+        if (submitProjectButtonText != null && string.IsNullOrEmpty(_submitProjectInitialText))
+            _submitProjectInitialText = submitProjectButtonText.text;
+
         if (submissionConfirmationPanel == null)
             submissionConfirmationPanel = FindSceneObject("SubmissionConfirmation");
 
@@ -512,7 +591,40 @@ public class BegulaVirusFlowController : MonoBehaviour
         if (mainMenu == null)
             mainMenu = FindSceneObject("Main_menu");
 
+        if (startGameButton == null)
+            startGameButton = FindSceneComponent<Button>("Btn_startGame");
+
+        CaptureOriginalAppearance();
+
         _endingReferencesResolved = true;
+    }
+
+    private void CaptureOriginalAppearance()
+    {
+        if (_originalAppearanceCaptured)
+            return;
+
+        _desktopBackgroundInitialState = CaptureImageState(desktopBackground);
+
+        if (appIconImages != null)
+        {
+            _appIconInitialStates = new ImageState[appIconImages.Length];
+            for (int i = 0; i < appIconImages.Length; i++)
+                _appIconInitialStates[i] = CaptureImageState(appIconImages[i]);
+        }
+
+        _originalAppearanceCaptured = true;
+    }
+
+    private void RestoreNormalDesktop()
+    {
+        RestoreImageState(_desktopBackgroundInitialState);
+
+        if (_appIconInitialStates == null)
+            return;
+
+        foreach (ImageState state in _appIconInitialStates)
+            RestoreImageState(state);
     }
 
     private void CloseOpenDesktopWindows()
@@ -534,6 +646,22 @@ public class BegulaVirusFlowController : MonoBehaviour
         SetSceneObjectActive("Home - Shuffle", false);
         SetSceneObjectActive("Timer", false);
         SetSceneObjectActive("Gameover_panel", false);
+    }
+
+    private void HideReplayOnlyButtons()
+    {
+        SetSceneObjectActive("Btn_License", false);
+        SetSceneObjectActive("Btn_Antivirus", false);
+    }
+
+    private void ResetSearchEngineToHomePage()
+    {
+        SearchEngineManager manager = searchEngineManager;
+        if (manager == null)
+            manager = FindSceneComponent<SearchEngineManager>();
+
+        if (manager != null)
+            manager.ResetToHomePage();
     }
 
     private void ApplyBelugaDesktop()
@@ -602,6 +730,30 @@ public class BegulaVirusFlowController : MonoBehaviour
 
         SetSceneObjectActive("Timer", false);
         SetSceneObjectActive("Gameover_panel", false);
+    }
+
+    private static ImageState CaptureImageState(Image image)
+    {
+        if (image == null)
+            return default;
+
+        return new ImageState
+        {
+            Image = image,
+            Sprite = image.sprite,
+            Color = image.color,
+            PreserveAspect = image.preserveAspect
+        };
+    }
+
+    private static void RestoreImageState(ImageState state)
+    {
+        if (state.Image == null)
+            return;
+
+        state.Image.sprite = state.Sprite;
+        state.Image.color = state.Color;
+        state.Image.preserveAspect = state.PreserveAspect;
     }
 
     private Transform FindWarningParent()

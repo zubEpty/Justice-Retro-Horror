@@ -32,6 +32,11 @@ public class VirusGlitchSequenceRunner : MonoBehaviour
         return Play(openedWindow, scratchClip, commandErrorClip, blueScreenClip, onComplete, true);
     }
 
+    public static void ResetPlayOnceState()
+    {
+        hasPlayed = false;
+    }
+
     private static bool Play(GameObject openedWindow, AudioClip scratchClip, AudioClip commandErrorClip, AudioClip blueScreenClip, System.Action onComplete, bool ignorePlayOnce)
     {
         if ((!ignorePlayOnce && hasPlayed) || openedWindow == null || SceneManager.GetActiveScene().name != SceneName)

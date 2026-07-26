@@ -182,10 +182,27 @@ public class SearchEngineManager : MonoBehaviour
         if (IsHomePageOnlyActive())
             return;
 
+        ResetToHomePage();
+    }
+
+    public void ResetToHomePage()
+    {
         HideBrowserPages();
 
         if (_homePage != null)
             _homePage.SetActive(true);
+
+        if (_SearchResultPage != null)
+            _SearchResultPage.SetActive(false);
+
+        if (NoResultPage != null)
+            NoResultPage.SetActive(false);
+
+        if (resultsParent != null)
+        {
+            foreach (Transform child in resultsParent)
+                Destroy(child.gameObject);
+        }
 
         ClearEntry();
     }
