@@ -7202,7 +7202,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 362095723}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2062992978}
+        m_TargetAssemblyTypeName: BegulaVirusFlowController, Assembly-CSharp
+        m_MethodName: StartBelugaEnding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &362095723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43635,6 +43647,21 @@ MonoBehaviour:
   emailDownloadTarget: {fileID: 0}
   emailAlertSlideDistance: 520
   emailAlertSlideDuration: 0.45
+  gameSuccessOkButton: {fileID: 362095722}
+  gameSuccessPanel: {fileID: 1234841831}
+  desktopBackground: {fileID: 912926224}
+  appIconImages:
+  - {fileID: 155347466}
+  - {fileID: 1947619917}
+  - {fileID: 1253590783}
+  - {fileID: 1191608470}
+  belugaSprite: {fileID: 21300000, guid: ffedd3714c1e8cb4b86f51c0ee87a220, type: 3}
+  toolbar: {fileID: 1520966747}
+  mainMenu: {fileID: 0}
+  endingScratchClip: {fileID: 8300000, guid: 8859dcdc4069ace40b529224152ca478, type: 3}
+  endingCommandErrorClip: {fileID: 8300000, guid: d8b645bc09d17fa4aa547905e4bf76b4, type: 3}
+  endingBlueScreenClip: {fileID: 8300000, guid: e8758eaa42f24ab4ea5df39608636835, type: 3}
+  endingWarningMessage: This pc is now owned by Begula, Get out.
 --- !u!1 &2069644066
 GameObject:
   m_ObjectHideFlags: 0

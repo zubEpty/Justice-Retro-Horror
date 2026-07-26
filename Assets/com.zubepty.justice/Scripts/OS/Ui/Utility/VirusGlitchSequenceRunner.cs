@@ -20,18 +20,29 @@ public class VirusGlitchSequenceRunner : MonoBehaviour
     private AudioClip commandErrorClip;
     private AudioClip blueScreenClip;
     private AudioSource audioSource;
+    private System.Action onComplete;
 
-    public static void PlayOnce(GameObject openedWindow, AudioClip scratchClip, AudioClip commandErrorClip, AudioClip blueScreenClip)
+    public static bool PlayOnce(GameObject openedWindow, AudioClip scratchClip, AudioClip commandErrorClip, AudioClip blueScreenClip)
     {
-        if (hasPlayed || openedWindow == null || SceneManager.GetActiveScene().name != SceneName)
-            return;
+        return Play(openedWindow, scratchClip, commandErrorClip, blueScreenClip, null, false);
+    }
+
+    public static bool PlayAgain(GameObject openedWindow, AudioClip scratchClip, AudioClip commandErrorClip, AudioClip blueScreenClip, System.Action onComplete = null)
+    {
+        return Play(openedWindow, scratchClip, commandErrorClip, blueScreenClip, onComplete, true);
+    }
+
+    private static bool Play(GameObject openedWindow, AudioClip scratchClip, AudioClip commandErrorClip, AudioClip blueScreenClip, System.Action onComplete, bool ignorePlayOnce)
+    {
+        if ((!ignorePlayOnce && hasPlayed) || openedWindow == null || SceneManager.GetActiveScene().name != SceneName)
+            return false;
 
         Canvas canvas = openedWindow.GetComponentInParent<Canvas>();
         if (canvas == null)
             canvas = FindSceneComponent<Canvas>();
 
         if (canvas == null)
-            return;
+            return false;
 
         hasPlayed = true;
 
@@ -42,7 +53,9 @@ public class VirusGlitchSequenceRunner : MonoBehaviour
         runner.scratchClip = scratchClip;
         runner.commandErrorClip = commandErrorClip;
         runner.blueScreenClip = blueScreenClip;
+        runner.onComplete = onComplete;
         runner.Begin(canvas.GetComponent<RectTransform>());
+        return true;
     }
 
     private void Begin(RectTransform canvasRect)
@@ -377,6 +390,7 @@ public class VirusGlitchSequenceRunner : MonoBehaviour
                 Destroy(spawnedObjects[i]);
         }
 
+        onComplete?.Invoke();
         Destroy(gameObject);
     }
 
