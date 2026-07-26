@@ -18,6 +18,7 @@ public class AntivirusDownloadController : MonoBehaviour
     private bool downloadStarted;
     private bool downloadCompleted;
     private bool initialized;
+    private GameObject currentDownloadTarget;
     private Tween downloadTween;
 
     private void Awake()
@@ -41,6 +42,7 @@ public class AntivirusDownloadController : MonoBehaviour
 
         if (downloadButton != null)
         {
+            downloadButton.interactable = true;
             downloadButton.onClick.RemoveListener(StartDownload);
             downloadButton.onClick.AddListener(StartDownload);
         }
@@ -59,21 +61,26 @@ public class AntivirusDownloadController : MonoBehaviour
 
         SetOkButtonState(false, waitingText);
 
-        if (antivirusButton != null)
+        if (antivirusButton != null && !antivirusButton.activeSelf)
             antivirusButton.SetActive(false);
     }
 
     public void StartDownload()
     {
+        StartDownload(antivirusButton);
+    }
+
+    public void StartDownload(GameObject downloadTarget)
+    {
         Initialize();
 
-        if (downloadStarted || downloadCompleted)
+        GameObject target = downloadTarget != null ? downloadTarget : antivirusButton;
+        if (downloadStarted || IsDownloadTargetEnabled(target))
             return;
 
         downloadStarted = true;
-
-        if (downloadButton != null)
-            downloadButton.interactable = false;
+        downloadCompleted = false;
+        currentDownloadTarget = target;
 
         if (downloadPanel != null)
         {
@@ -102,14 +109,16 @@ public class AntivirusDownloadController : MonoBehaviour
         if (progressFill != null)
             progressFill.fillAmount = 1f;
 
+        downloadStarted = false;
         downloadCompleted = true;
         downloadTween = null;
 
-        if (antivirusButton != null)
+        GameObject target = currentDownloadTarget != null ? currentDownloadTarget : antivirusButton;
+        if (target != null)
         {
-            antivirusButton.SetActive(true);
-            antivirusButton.transform.SetAsLastSibling();
-            RaiseParentsToFront(antivirusButton.transform);
+            target.SetActive(true);
+            target.transform.SetAsLastSibling();
+            RaiseParentsToFront(target.transform);
         }
 
         SetOkButtonState(true, doneText);
@@ -121,6 +130,11 @@ public class AntivirusDownloadController : MonoBehaviour
             return;
 
         downloadPanel.SetActive(false);
+    }
+
+    private static bool IsDownloadTargetEnabled(GameObject downloadTarget)
+    {
+        return downloadTarget != null && downloadTarget.activeSelf;
     }
 
     private void SetOkButtonState(bool isInteractable, string label)
@@ -135,10 +149,10 @@ public class AntivirusDownloadController : MonoBehaviour
     private void ResolveReferences()
     {
         if (antivirusButton == null)
-            antivirusButton = FindSceneObject("Btn_Virus");
+            antivirusButton = FindSceneObject("Btn_Antivirus");
 
         if (antivirusButton == null)
-            antivirusButton = FindSceneObject("Btn_Antivirus");
+            antivirusButton = FindSceneObject("Btn_Virus");
     }
 
     private static GameObject FindSceneObject(string objectName)
