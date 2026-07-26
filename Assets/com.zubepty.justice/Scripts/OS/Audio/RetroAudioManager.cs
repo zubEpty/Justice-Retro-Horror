@@ -15,6 +15,9 @@ public sealed class RetroAudioManager : MonoBehaviour
 
     private AudioSource musicSource;
     private AudioSource sfxSource;
+    private AudioSource desktopLoopSource;
+    private AudioSource platformerLoopSource;
+    private AudioSource shuffleLoopSource;
     private GameObject mainMenu;
     private bool wasMainMenuActive;
     private float nextButtonScanTime;
@@ -74,6 +77,36 @@ public sealed class RetroAudioManager : MonoBehaviour
     public static void PlayDoorMove()
     {
         Instance.PlayOneShot("Door_move");
+    }
+
+    public static void PlayDesktopMode()
+    {
+        Instance.PlayLoop(Instance.desktopLoopSource, "Desktop_mode");
+    }
+
+    public static void StopDesktopMode()
+    {
+        Instance.StopLoop(Instance.desktopLoopSource);
+    }
+
+    public static void PlayPlatformerTheme()
+    {
+        Instance.PlayLoop(Instance.platformerLoopSource, "Platformer");
+    }
+
+    public static void StopPlatformerTheme()
+    {
+        Instance.StopLoop(Instance.platformerLoopSource);
+    }
+
+    public static void PlayCardShuffleTheme()
+    {
+        Instance.PlayLoop(Instance.shuffleLoopSource, "Card_Shuffle");
+    }
+
+    public static void StopCardShuffleTheme()
+    {
+        Instance.StopLoop(Instance.shuffleLoopSource);
     }
 
     public static void RefreshSceneAudio()
@@ -139,6 +172,10 @@ public sealed class RetroAudioManager : MonoBehaviour
         sfxSource.loop = false;
         sfxSource.playOnAwake = false;
         sfxSource.volume = 0.85f;
+
+        desktopLoopSource = CreateLoopSource(0.22f);
+        platformerLoopSource = CreateLoopSource(0.2f);
+        shuffleLoopSource = CreateLoopSource(0.2f);
     }
 
     private void ResolveSceneReferences()
@@ -160,6 +197,9 @@ public sealed class RetroAudioManager : MonoBehaviour
                 continue;
 
             button.onClick.AddListener(PlayMouseClick);
+            if (button.name == "Btn_Virus")
+                button.onClick.AddListener(StopDesktopMode);
+
             hookedButtons.Add(button);
         }
     }
@@ -210,6 +250,34 @@ public sealed class RetroAudioManager : MonoBehaviour
             return;
 
         sfxSource.PlayOneShot(clip);
+    }
+
+    private AudioSource CreateLoopSource(float volume)
+    {
+        AudioSource source = gameObject.AddComponent<AudioSource>();
+        source.loop = true;
+        source.playOnAwake = false;
+        source.volume = volume;
+        return source;
+    }
+
+    private void PlayLoop(AudioSource source, string clipName)
+    {
+        AudioClip clip = LoadClip(clipName);
+        if (clip == null || source == null)
+            return;
+
+        if (source.clip == clip && source.isPlaying)
+            return;
+
+        source.clip = clip;
+        source.Play();
+    }
+
+    private void StopLoop(AudioSource source)
+    {
+        if (source != null && source.isPlaying)
+            source.Stop();
     }
 
     private AudioClip LoadClip(string clipName)

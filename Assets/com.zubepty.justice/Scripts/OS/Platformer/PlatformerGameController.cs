@@ -404,8 +404,11 @@ public sealed class PlatformerGameController : MonoBehaviour
             yield return new WaitForSecondsRealtime(nextGameDelay);
         }
 
+        RetroAudioManager.StopPlatformerTheme();
+
         if (nextGameWindow != null)
         {
+            RetroAudioManager.PlayCardShuffleTheme();
             nextGameWindow.SetActive(true);
             nextGameWindow.transform.SetAsLastSibling();
         }

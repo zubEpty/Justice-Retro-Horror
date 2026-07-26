@@ -216,6 +216,8 @@ public class BegulaVirusFlowController : MonoBehaviour
         if (mainMenu != null)
             mainMenu.SetActive(false);
 
+        RetroAudioManager.PlayDesktopMode();
+
         SetSceneObjectActive("BegulaAntiVIRUS", false);
         SetSceneObjectActive("BegulaVIRUS", false);
     }
@@ -354,6 +356,8 @@ public class BegulaVirusFlowController : MonoBehaviour
 
     private void OpenPlatformerGame()
     {
+        RetroAudioManager.StopDesktopMode();
+        RetroAudioManager.PlayPlatformerTheme();
         OpenWindow(platformerGameWindow, platformerFocusHandler);
     }
 

@@ -20,6 +20,8 @@ public class VirusDownloadButton : MonoBehaviour, IPointerClickHandler
         if (downloadTarget == null)
             downloadTarget = FindSceneObject("Btn_Virus");
 
+        RetroAudioManager.StopDesktopMode();
+
         if (downloadController != null)
             downloadController.StartDownload(downloadTarget);
     }

@@ -126,6 +126,7 @@ public class HomeShufflePuzzleController : MonoBehaviour
         if (IsCorrectOrder())
         {
             solved = true;
+            RetroAudioManager.StopCardShuffleTheme();
             ShowSuccess();
             return;
         }
