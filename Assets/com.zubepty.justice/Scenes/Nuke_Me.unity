@@ -1112,7 +1112,7 @@ MonoBehaviour:
   downloadLicenseButton: {fileID: 173286878}
   licenseButton: {fileID: 1179068793}
   licenseDownloadController: {fileID: 0}
-  wrongTriesBeforeHint: 3
+  wrongTriesBeforeHint: 1
   dropDuration: 0.18
   hintMessage: 'Hint: Search Everywhere, anywhere around.'
   correctOrder: 00000000030000000200000001000000
@@ -11471,7 +11471,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 470411323}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -16157,7 +16157,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '> <S>FINISH  BUILDING THE GAME'
+  m_text: '> <S>FINISH  BUILDING THE GAME (done)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c709235a3bfe1d34ab4beec06e20259f, type: 2}
   m_sharedMaterial: {fileID: -7335560186463443536, guid: c709235a3bfe1d34ab4beec06e20259f, type: 2}
