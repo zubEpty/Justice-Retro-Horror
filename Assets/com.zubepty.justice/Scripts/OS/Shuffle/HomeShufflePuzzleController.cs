@@ -29,6 +29,7 @@ public class HomeShufflePuzzleController : MonoBehaviour
     [SerializeField] private Button submitButton;
     [SerializeField] private Button downloadLicenseButton;
     [SerializeField] private GameObject licenseButton;
+    [SerializeField] private AntivirusDownloadController licenseDownloadController;
 
     [Header("Puzzle Settings")]
     [SerializeField] private int wrongTriesBeforeHint = 3;
@@ -65,7 +66,7 @@ public class HomeShufflePuzzleController : MonoBehaviour
             submitButton.onClick.RemoveListener(SubmitOrder);
 
         if (downloadLicenseButton != null)
-            downloadLicenseButton.onClick.RemoveListener(EnableLicenseButton);
+            downloadLicenseButton.onClick.RemoveListener(StartLicenseDownload);
     }
 
     public void BeginCardDrag(HomeShuffleCard card, int siblingIndex)
@@ -136,6 +137,17 @@ public class HomeShufflePuzzleController : MonoBehaviour
             ShowHint();
     }
 
+    private void StartLicenseDownload()
+    {
+        if (licenseDownloadController != null && licenseButton != null)
+        {
+            licenseDownloadController.StartDownload(licenseButton);
+            return;
+        }
+
+        EnableLicenseButton();
+    }
+
     private void EnableLicenseButton()
     {
         if (licenseButton == null)
@@ -168,10 +180,16 @@ public class HomeShufflePuzzleController : MonoBehaviour
             submitButton = transform.Find("Container/Btn_Submit")?.GetComponent<Button>();
 
         if (downloadLicenseButton == null)
+            downloadLicenseButton = transform.Find("Container_Success/Btn_LicenseKeyDownload")?.GetComponent<Button>();
+
+        if (downloadLicenseButton == null)
             downloadLicenseButton = transform.Find("Container_Success/Btn_Submit")?.GetComponent<Button>();
 
         if (licenseButton == null)
             licenseButton = FindInactiveObjectByName("Btn_License");
+
+        if (licenseDownloadController == null)
+            licenseDownloadController = FindSceneComponent<AntivirusDownloadController>();
     }
 
     private void InitializeState()
@@ -236,8 +254,8 @@ public class HomeShufflePuzzleController : MonoBehaviour
 
         if (downloadLicenseButton != null)
         {
-            downloadLicenseButton.onClick.RemoveListener(EnableLicenseButton);
-            downloadLicenseButton.onClick.AddListener(EnableLicenseButton);
+            downloadLicenseButton.onClick.RemoveListener(StartLicenseDownload);
+            downloadLicenseButton.onClick.AddListener(StartLicenseDownload);
         }
     }
 
@@ -361,8 +379,22 @@ public class HomeShufflePuzzleController : MonoBehaviour
         for (int i = 0; i < transforms.Length; i++)
         {
             Transform candidate = transforms[i];
-            if (candidate.name == objectName && candidate.hideFlags == HideFlags.None)
+            if (candidate.name == objectName && candidate.hideFlags == HideFlags.None && candidate.gameObject.scene.IsValid())
                 return candidate.gameObject;
+        }
+
+        return null;
+    }
+
+    private static T FindSceneComponent<T>() where T : Component
+    {
+        T[] components = Resources.FindObjectsOfTypeAll<T>();
+
+        for (int i = 0; i < components.Length; i++)
+        {
+            T candidate = components[i];
+            if (candidate != null && candidate.gameObject.scene.IsValid())
+                return candidate;
         }
 
         return null;
