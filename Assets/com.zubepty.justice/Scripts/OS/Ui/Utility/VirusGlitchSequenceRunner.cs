@@ -98,6 +98,7 @@ public class VirusGlitchSequenceRunner : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(0.08f, 0.22f));
         }
 
+        yield return StartCoroutine(ShowBlueScreenFlash());
         yield return StartCoroutine(FlickerOverlay(overlayGroup, 1.2f, 0.04f, 0.2f));
         yield return new WaitForSeconds(0.35f);
         Cleanup();
@@ -268,6 +269,55 @@ public class VirusGlitchSequenceRunner : MonoBehaviour
         }
 
         group.alpha = 0f;
+    }
+
+    private IEnumerator ShowBlueScreenFlash()
+    {
+        GameObject blueScreen = new GameObject("Virus_BlueScreen_Flash", typeof(RectTransform), typeof(CanvasRenderer));
+        blueScreen.transform.SetParent(transform.parent, false);
+        blueScreen.transform.SetAsLastSibling();
+        spawnedObjects.Add(blueScreen);
+
+        RectTransform rect = blueScreen.GetComponent<RectTransform>();
+        StretchToParent(rect);
+
+        Image background = blueScreen.AddComponent<Image>();
+        background.color = new Color(0.02f, 0.15f, 0.78f, 1f);
+        background.raycastTarget = false;
+
+        CanvasGroup group = blueScreen.AddComponent<CanvasGroup>();
+        group.blocksRaycasts = false;
+        group.alpha = 0f;
+
+        CreateText("SadFace", rect, ":(", 96f, Color.white, TextAlignmentOptions.Left, new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(0f, 1f), new Vector2(96f, -86f), new Vector2(220f, 120f));
+        CreateText("ErrorText", rect, "Your PC ran into a problem and needs to restart.\n\nbegula.exe caused a critical system error.\n\nCollecting error info: 94%\n\nStop code: PLAYER_OPENED_VIRUS_FILE", 34f, Color.white, TextAlignmentOptions.TopLeft, new Vector2(0f, 0f), new Vector2(1f, 1f), new Vector2(0f, 1f), new Vector2(98f, -220f), new Vector2(-180f, -260f));
+
+        yield return StartCoroutine(FadeCanvasGroup(group, 0f, 1f, 0.08f));
+        yield return StartCoroutine(ShakeScreen(0.55f, 24f));
+        yield return new WaitForSeconds(1.35f);
+        yield return StartCoroutine(FadeCanvasGroup(group, 1f, 0f, 0.18f));
+
+        spawnedObjects.Remove(blueScreen);
+        Destroy(blueScreen);
+    }
+
+    private IEnumerator FadeCanvasGroup(CanvasGroup group, float startAlpha, float endAlpha, float duration)
+    {
+        if (group == null)
+            yield break;
+
+        float elapsed = 0f;
+        group.alpha = startAlpha;
+
+        while (elapsed < duration)
+        {
+            float progress = duration <= 0f ? 1f : elapsed / duration;
+            group.alpha = Mathf.Lerp(startAlpha, endAlpha, progress);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        group.alpha = endAlpha;
     }
 
     private void Cleanup()
