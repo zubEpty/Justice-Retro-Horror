@@ -1,4 +1,4 @@
-using System.Collections;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,17 +17,39 @@ public class AntivirusDownloadController : MonoBehaviour
 
     private bool downloadStarted;
     private bool downloadCompleted;
-    private Coroutine downloadRoutine;
+    private bool initialized;
+    private Tween downloadTween;
 
     private void Awake()
     {
+        Initialize();
+    }
+
+    private void OnDestroy()
+    {
+        downloadTween?.Kill();
+    }
+
+    private void Initialize()
+    {
+        if (initialized)
+            return;
+
+        initialized = true;
+
         ResolveReferences();
 
         if (downloadButton != null)
+        {
+            downloadButton.onClick.RemoveListener(StartDownload);
             downloadButton.onClick.AddListener(StartDownload);
+        }
 
         if (okButton != null)
+        {
+            okButton.onClick.RemoveListener(CloseDownloadPanel);
             okButton.onClick.AddListener(CloseDownloadPanel);
+        }
 
         if (downloadPanel != null)
             downloadPanel.SetActive(false);
@@ -43,6 +65,8 @@ public class AntivirusDownloadController : MonoBehaviour
 
     public void StartDownload()
     {
+        Initialize();
+
         if (downloadStarted || downloadCompleted)
             return;
 
@@ -63,31 +87,23 @@ public class AntivirusDownloadController : MonoBehaviour
 
         SetOkButtonState(false, waitingText);
 
-        if (downloadRoutine != null)
-            StopCoroutine(downloadRoutine);
-
-        downloadRoutine = StartCoroutine(DownloadRoutine());
+        downloadTween?.Kill();
+        downloadTween = progressFill == null
+            ? DOVirtual.DelayedCall(downloadDuration, CompleteDownload).SetUpdate(true)
+            : progressFill
+                .DOFillAmount(1f, downloadDuration)
+                .SetEase(Ease.Linear)
+                .SetUpdate(true)
+                .OnComplete(CompleteDownload);
     }
 
-    private IEnumerator DownloadRoutine()
+    private void CompleteDownload()
     {
-        float elapsed = 0f;
-
-        while (elapsed < downloadDuration)
-        {
-            elapsed += Time.deltaTime;
-
-            if (progressFill != null)
-                progressFill.fillAmount = Mathf.Clamp01(elapsed / downloadDuration);
-
-            yield return null;
-        }
-
         if (progressFill != null)
             progressFill.fillAmount = 1f;
 
         downloadCompleted = true;
-        downloadRoutine = null;
+        downloadTween = null;
 
         if (antivirusButton != null)
         {
